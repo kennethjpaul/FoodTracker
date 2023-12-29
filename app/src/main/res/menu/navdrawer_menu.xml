@@ -16,7 +16,7 @@
                 android:title="@string/food" />
             <item
                 android:id="@+id/logExerciseFragment"
-                android:icon="@drawable/food"
+                android:icon="@drawable/exercise"
                 android:title="@string/exercise" />
         </menu>
 
@@ -31,7 +31,7 @@
                 android:title="@string/food" />
             <item
                 android:id="@+id/listExerciseFragment"
-                android:icon="@drawable/food"
+                android:icon="@drawable/exercise"
                 android:title="@string/exercise" />
         </menu>
 
@@ -42,11 +42,11 @@
         <menu>
             <item
                 android:id="@+id/statsDailyFragment"
-                android:icon="@drawable/food"
+                android:icon="@drawable/daily"
                 android:title="@string/daily" />
             <item
                 android:id="@+id/statsMonthlyFragment"
-                android:icon="@drawable/food"
+                android:icon="@drawable/monthly"
                 android:title="@string/monthly" />
         </menu>
 
@@ -56,7 +56,7 @@
         <menu>
             <item
                 android:id="@+id/settingsFragment"
-                android:icon="@drawable/food"
+                android:icon="@drawable/settings"
                 android:title="@string/settings" />
         </menu>
     </item>
