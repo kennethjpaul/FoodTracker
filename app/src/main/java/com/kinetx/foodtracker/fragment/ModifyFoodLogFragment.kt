@@ -41,6 +41,15 @@ class ModifyFoodLogFragment : Fragment() {
             viewModel.datePick(it)
         }
 
+        binding.modifyFoodLogIncreaseDate.setOnClickListener()
+        {
+            viewModel.changeDate(1)
+        }
+        binding.modifyFoodLogDecreaseDate.setOnClickListener()
+        {
+            viewModel.changeDate(-1)
+        }
+
         // Inflate the layout for this fragment
         return binding.root
     }

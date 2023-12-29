@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kinetx.foodtracker.fragment.ModifyFoodLogFragmentArgs
+import com.kinetx.foodtracker.helpers.HelperFunctions
 
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
 
@@ -49,6 +50,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         myCalendar.set(Calendar.YEAR, year)
         myCalendar.set(Calendar.MONTH, month)
         myCalendar.set(Calendar.DAY_OF_MONTH, dayofMonth)
+        myCalendar = HelperFunctions.resetToMidnight(myCalendar)
         _selectedDay.value = dayofMonth.toString()
         _selectedMonth.value = month.toString()
         _selectedYear.value = year.toString()
@@ -64,5 +66,13 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
                 myCalendar.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
+    }
+
+    fun changeDate(direction: Int)
+    {
+        myCalendar = HelperFunctions.changeDayByN(myCalendar,1,direction)
+        _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
+        _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
+        _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
     }
 }

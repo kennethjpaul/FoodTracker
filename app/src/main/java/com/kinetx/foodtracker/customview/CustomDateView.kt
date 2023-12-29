@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
+import android.icu.util.Calendar
 import android.util.AttributeSet
 import android.util.Log
 import androidx.core.content.withStyledAttributes
@@ -12,7 +13,6 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.helpers.HelperFunctions
-import java.util.*
 
 class CustomDateView @JvmOverloads constructor(
     context: Context,
