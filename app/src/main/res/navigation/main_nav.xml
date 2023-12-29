@@ -8,4 +8,8 @@
         android:id="@+id/homeFragment"
         android:name="com.kinetx.foodtracker.fragment.HomeFragment"
         android:label="Home" />
+    <fragment
+        android:id="@+id/logFoodFragment"
+        android:name="com.kinetx.foodtracker.fragment.LogFoodFragment"
+        android:label="LogFoodFragment" />
 </navigation>

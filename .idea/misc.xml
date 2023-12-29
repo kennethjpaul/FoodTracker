@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/c_food_card.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_log_food.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/menu/navdrawer_menu.xml" value="0.267578125" />
       </map>
