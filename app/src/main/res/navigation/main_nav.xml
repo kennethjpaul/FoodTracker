@@ -32,4 +32,8 @@
         android:id="@+id/statsMonthlyFragment"
         android:name="com.kinetx.foodtracker.fragment.StatsMonthlyFragment"
         android:label="StatsMonthlyFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.kinetx.foodtracker.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

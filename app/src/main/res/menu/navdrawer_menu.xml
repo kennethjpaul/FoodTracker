@@ -52,5 +52,15 @@
 
     </item>
 
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/settingsFragment"
+                android:icon="@drawable/food"
+                android:title="@string/settings" />
+        </menu>
+    </item>
+
+
 
 </menu>
