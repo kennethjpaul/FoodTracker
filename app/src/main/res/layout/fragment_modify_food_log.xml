@@ -17,12 +17,13 @@
          android:id="@+id/modify_food_log_date"
          android:layout_width="150dp"
          android:layout_height="60dp"
-         app:day_c="@{modifyFoodLogVM.selectedDay}"
-         app:month_c="@{modifyFoodLogVM.selectedMonth}"
-         app:year_c="@{modifyFoodLogVM.selectedYear}"
+         android:layout_marginTop="32dp"
          android:background="@color/azure"
+         app:day_c="@{modifyFoodLogVM.selectedDay}"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent" />
+         app:layout_constraintTop_toTopOf="parent"
+         app:month_c="@{modifyFoodLogVM.selectedMonth}"
+         app:year_c="@{modifyFoodLogVM.selectedYear}" />
  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
