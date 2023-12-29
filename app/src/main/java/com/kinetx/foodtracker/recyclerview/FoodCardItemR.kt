@@ -27,7 +27,8 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
         }
 
         override fun onClick(v: View?) {
-            Log.i("III","Clicked")
+            val position = adapterPosition
+            Log.i("III",position.toString())
         }
 
 
@@ -44,7 +45,6 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
         holder.cardRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.cardRecyclerView.setHasFixedSize(true)
         holder.cardRecyclerView.adapter = adapter
-
         when(currentItem.foodType)
         {
             FoodType.BREAKFAST-> {
