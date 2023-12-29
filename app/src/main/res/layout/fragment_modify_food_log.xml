@@ -55,6 +55,7 @@
          app:layout_constraintTop_toTopOf="@+id/modify_food_log_date" />
 
      <Spinner
+         android:id="@+id/modify_food_log_spinner"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginStart="32dp"
@@ -65,5 +66,79 @@
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toBottomOf="@+id/modify_food_log_date" />
+
+     <com.google.android.material.card.MaterialCardView
+         android:id="@+id/modify_food_log_selected_card"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginTop="24dp"
+         android:layout_marginEnd="16dp"
+         app:cardBackgroundColor="@color/white"
+         app:cardElevation="2dp"
+         app:cardCornerRadius="2dp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_spinner">
+
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:padding="16dp">
+
+             <TextView
+                 android:id="@+id/modify_food_log_selected_title"
+                 android:layout_width="wrap_content"
+                 android:layout_height="56dp"
+                 android:gravity="center"
+                 android:text="@string/selected_food"
+                 android:textSize="16sp"
+                 android:textStyle="bold"
+                 android:textColor="@color/black"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+             <ImageView
+                 android:id="@+id/modify_food_log_selected_edit"
+                 android:layout_width="56dp"
+                 android:layout_height="56dp"
+                 android:scaleY="0.5"
+                 android:scaleX="0.5"
+                 android:background="@drawable/ic_baseline_edit_24"
+                 android:backgroundTint="@color/azure"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:background="@color/azure"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_selected_title" />
+
+             <TextView
+                 android:id="@+id/modify_food_log_selected_name"
+                 android:layout_width="match_parent"
+                 android:layout_marginTop="8dp"
+                 android:layout_height="wrap_content"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+                 android:textColor="@color/black"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/modify_food_log_selected_title" />
+
+             <TextView
+                 android:id="@+id/modify_food_log_selected_desc"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="4dp"
+                 android:textSize="12sp"
+                 android:textColor="@color/black"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/modify_food_log_selected_name" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+     </com.google.android.material.card.MaterialCardView>
  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
