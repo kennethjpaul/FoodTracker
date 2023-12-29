@@ -8,10 +8,18 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.kinetx.foodtracker.enums.FoodType
 import com.kinetx.foodtracker.fragment.ModifyFoodLogFragmentArgs
 import com.kinetx.foodtracker.helpers.HelperFunctions
 
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
+
+
+    private val spinnerValueList = listOf("Breakfast","Lunch","Snacks","Dinner")
+
+    private val _foodTypeSpinnerSelected = MutableLiveData<Int>()
+    val foodTypeSpinnerSelected : LiveData<Int>
+        get() = _foodTypeSpinnerSelected
 
     private val _selectedDay = MutableLiveData<String>()
     val selectedDay : LiveData<String>
@@ -30,9 +38,9 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         get() = _fragmentTitle
 
 
-    private val _amountSpinner = MutableLiveData<List<String>>()
-    val amountSpinner : LiveData<List<String>>
-        get() = _amountSpinner
+    private val _foodTypeSpinner = MutableLiveData<List<String>>()
+    val foodTypeSpinner : LiveData<List<String>>
+        get() = _foodTypeSpinner
 
     private var myCalendar : Calendar = Calendar.getInstance()
 
@@ -43,6 +51,17 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
+
+        _foodTypeSpinner.value = spinnerValueList
+
+        _foodTypeSpinnerSelected.value = when(args.foodType)
+        {
+            FoodType.BREAKFAST->0
+            FoodType.LUNCH -> 1
+            FoodType.SNACKS -> 2
+            FoodType.DINNER -> 3
+        }
+
     }
 
 
