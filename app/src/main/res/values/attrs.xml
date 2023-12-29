@@ -4,4 +4,15 @@
         <attr name="cardTitle" format="string"/>
         <attr name="cardColor" format="color"/>
     </declare-styleable>
+    <declare-styleable name="CustomDateView">
+        <attr name="date" format="integer"/>
+        <attr name="day_c" format="string"/>
+        <attr name="month_c" format="string"/>
+        <attr name="year_c" format="string"/>
+        <attr name="weekStart_c" format="string"/>
+        <attr name="weekEnd_c" format="string"/>
+        <attr name="weekStartMonth_c" format="string"/>
+        <attr name="weekEndMonth_c" format="string"/>
+        <attr name="type_c" format="integer"/>
+    </declare-styleable>
 </resources>

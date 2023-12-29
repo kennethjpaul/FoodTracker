@@ -35,6 +35,12 @@ class ModifyFoodLogFragment : Fragment() {
         binding.modifyFoodLogVM = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        binding.modifyFoodLogDate.setOnClickListener()
+        {
+            viewModel.datePick(it)
+        }
+
         // Inflate the layout for this fragment
         return binding.root
     }
