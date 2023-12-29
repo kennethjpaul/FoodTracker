@@ -65,12 +65,12 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     }
 
 
-    private val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayofMonth ->
+    private val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
         myCalendar.set(Calendar.YEAR, year)
         myCalendar.set(Calendar.MONTH, month)
-        myCalendar.set(Calendar.DAY_OF_MONTH, dayofMonth)
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         myCalendar = HelperFunctions.resetToMidnight(myCalendar)
-        _selectedDay.value = dayofMonth.toString()
+        _selectedDay.value = dayOfMonth.toString()
         _selectedMonth.value = month.toString()
         _selectedYear.value = year.toString()
     }
