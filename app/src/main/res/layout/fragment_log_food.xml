@@ -18,6 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/ao"
+            android:layout_marginBottom="32dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/food_log_recyclerview"
             android:layout_marginStart="8dp"
