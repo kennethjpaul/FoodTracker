@@ -1,8 +1,5 @@
 package com.kinetx.foodtracker.recyclerview
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,31 +40,37 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
 
     override fun onBindViewHolder(holder: FoodCardItemR.MyViewHolder, position: Int) {
         val currentItem = _list[position]
+        val adapter = FoodLogItemR(this)
+        holder.cardRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
+        holder.cardRecyclerView.setHasFixedSize(true)
+        holder.cardRecyclerView.adapter = adapter
+
         when(currentItem.foodType)
         {
             FoodType.BREAKFAST-> {
                 holder.cardTitle.text = "Breakfast"
                 holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFF3498DB").toInt())
+                adapter.setParentPosition(0)
             }
             FoodType.LUNCH -> {
                 holder.cardTitle.text = "Lunch"
                 holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFF16A085").toInt())
+                adapter.setParentPosition(1)
             }
             FoodType.SNACKS -> {
                 holder.cardTitle.text = "Snacks"
                 holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFFC0392B").toInt())
+                adapter.setParentPosition(2)
             }
             FoodType.DINNER -> {
                 holder.cardTitle.text = "Dinner"
                 holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFF8E44AD").toInt())
+                adapter.setParentPosition(3)
             }
         }
 
         holder.cardTotal.text = currentItem.foodCardTotal.toString()
-        val adapter = FoodLogItemR(this)
-        holder.cardRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.cardRecyclerView.setHasFixedSize(true)
-        holder.cardRecyclerView.adapter = adapter
+
 
         adapter.setData(currentItem.foodLogData)
 
@@ -83,8 +86,9 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
         notifyDataSetChanged()
     }
 
-    override fun onSelectFoodLogItemClick(position: Int) {
-        TODO("Not yet implemented")
+    override fun onSelectFoodLogItemClick(position: Int, _parentPosition: Int) {
+        val m  = _list[_parentPosition].foodLogData[position].foodLogId
+        Log.i("III", m.toString())
     }
 }
 

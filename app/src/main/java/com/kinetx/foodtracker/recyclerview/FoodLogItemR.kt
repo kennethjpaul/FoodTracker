@@ -1,7 +1,6 @@
 package com.kinetx.foodtracker.recyclerview
 
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -12,6 +11,7 @@ import com.kinetx.foodtracker.dataclass.FoodLogItemData
 class FoodLogItemR(val listener: OnSelectFoodLogItem) : RecyclerView.Adapter<FoodLogItemR.MyViewHolder>() {
 
     private var _list = emptyList<FoodLogItemData>()
+    private var _parentPosition : Int = -1
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener
     {
@@ -27,7 +27,7 @@ class FoodLogItemR(val listener: OnSelectFoodLogItem) : RecyclerView.Adapter<Foo
             val position = adapterPosition
             if(position!=RecyclerView.NO_POSITION)
             {
-                listener.onSelectFoodLogItemClick(position)
+                listener.onSelectFoodLogItemClick(position,_parentPosition)
             }
         }
     }
@@ -53,13 +53,17 @@ class FoodLogItemR(val listener: OnSelectFoodLogItem) : RecyclerView.Adapter<Foo
 
 
     interface OnSelectFoodLogItem {
-        fun onSelectFoodLogItemClick(position: Int)
+        fun onSelectFoodLogItemClick(position: Int, _parentPosition: Int)
     }
 
     fun setData( c : List<FoodLogItemData>)
     {
         this._list = c
         notifyDataSetChanged()
+    }
+
+    fun setParentPosition(i: Int) {
+        _parentPosition = i
     }
 
 }
