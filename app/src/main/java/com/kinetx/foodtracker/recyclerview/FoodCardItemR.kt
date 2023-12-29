@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.dataclass.FoodCardItemData
 import com.kinetx.foodtracker.enums.FoodType
 
-class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogItemR.OnSelectFoodLogItem {
+class FoodCardItemR(val listener : FoodCardNavigate): RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogItemR.OnSelectFoodLogItem {
 
     private var _list = emptyList<FoodCardItemData>()
 
@@ -22,17 +23,27 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
         val cardRecyclerView : RecyclerView = itemView.findViewById(R.id.food_card_recyclerview)
         val cardAddIcon: ImageView = itemView.findViewById(R.id.food_card_add_icon)
         val cardColor : View = itemView.findViewById(R.id.food_card_rectangle)
+
         init {
             cardAddIcon.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            val position = adapterPosition
-            Log.i("III",position.toString())
+            val foodId  = -1L
+            val foodType = when(adapterPosition)
+            {
+                0 -> FoodType.BREAKFAST
+                1->FoodType.LUNCH
+                2->FoodType.SNACKS
+                3->FoodType.DINNER
+                else->FoodType.BREAKFAST
+            }
+            listener.foodCardNavigate(foodId, foodType)
         }
 
-
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodCardItemR.MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.r_food_card,parent,false)
@@ -87,8 +98,22 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
     }
 
     override fun onSelectFoodLogItemClick(position: Int, _parentPosition: Int) {
-        val m  = _list[_parentPosition].foodLogData[position].foodLogId
-        Log.i("III", m.toString())
+        val foodId  = _list[_parentPosition].foodLogData[position].foodLogId
+        val foodType = when(_parentPosition)
+        {
+            0 -> FoodType.BREAKFAST
+            1->FoodType.LUNCH
+            2->FoodType.SNACKS
+            3->FoodType.DINNER
+            else->FoodType.BREAKFAST
+        }
+        listener.foodCardNavigate(foodId,foodType)
+
     }
+
+    interface FoodCardNavigate {
+        fun foodCardNavigate(foodId: Long,  foodType: FoodType)
+    }
+
 }
 

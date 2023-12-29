@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentLogFoodBinding
@@ -18,7 +19,7 @@ import com.kinetx.foodtracker.viewmodel.LogFoodVM
 import com.kinetx.foodtracker.viewmodelfactory.LogFoodVMF
 
 
-class LogFoodFragment : Fragment() {
+class LogFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
 
     private lateinit var binding : FragmentLogFoodBinding
     private lateinit var viewModel : LogFoodVM
@@ -61,7 +62,7 @@ class LogFoodFragment : Fragment() {
         foodCard.add(FoodCardItemData(FoodType.SNACKS,2000F,snacksM))
         foodCard.add(FoodCardItemData(FoodType.DINNER,20F,dinnerM))
 
-        val adapter = FoodCardItemR()
+        val adapter = FoodCardItemR(this)
 
         binding.foodLogRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.foodLogRecyclerview.setHasFixedSize(true)
@@ -71,6 +72,10 @@ class LogFoodFragment : Fragment() {
         adapter.setData(foodCard)
 
         return binding.root
+    }
+
+    override fun foodCardNavigate(foodId: Long, foodType: FoodType) {
+        view?.findNavController()?.navigate(LogFoodFragmentDirections.actionLogFoodFragmentToModifyFoodLogFragment(foodId,foodType))
     }
 
 }
