@@ -9,4 +9,8 @@
     <string name="_99999">99999</string>
     <string name="total">Total</string>
     <string name="food_name">Food name</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="snacks">Snacks</string>
+    <string name="dinner">Dinner</string>
 </resources>
