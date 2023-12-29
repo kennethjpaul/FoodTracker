@@ -12,4 +12,24 @@
         android:id="@+id/logFoodFragment"
         android:name="com.kinetx.foodtracker.fragment.LogFoodFragment"
         android:label="LogFoodFragment" />
+    <fragment
+        android:id="@+id/logExerciseFragment"
+        android:name="com.kinetx.foodtracker.fragment.LogExerciseFragment"
+        android:label="LogExerciseFragment" />
+    <fragment
+        android:id="@+id/listFoodFragment"
+        android:name="com.kinetx.foodtracker.fragment.ListFoodFragment"
+        android:label="ListFoodFragment" />
+    <fragment
+        android:id="@+id/listExerciseFragment"
+        android:name="com.kinetx.foodtracker.fragment.ListExerciseFragment"
+        android:label="ListExerciseFragment" />
+    <fragment
+        android:id="@+id/statsDailyFragment"
+        android:name="com.kinetx.foodtracker.fragment.StatsDailyFragment"
+        android:label="StatsDailyFragment" />
+    <fragment
+        android:id="@+id/statsMonthlyFragment"
+        android:name="com.kinetx.foodtracker.fragment.StatsMonthlyFragment"
+        android:label="StatsMonthlyFragment" />
 </navigation>

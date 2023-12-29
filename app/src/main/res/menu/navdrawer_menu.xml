@@ -14,6 +14,40 @@
                 android:id="@+id/logFoodFragment"
                 android:icon="@drawable/food"
                 android:title="@string/food" />
+            <item
+                android:id="@+id/logExerciseFragment"
+                android:icon="@drawable/food"
+                android:title="@string/exercise" />
+        </menu>
+
+    </item>
+
+    <item
+        android:title="@string/data">
+        <menu>
+            <item
+                android:id="@+id/listFoodFragment"
+                android:icon="@drawable/food"
+                android:title="@string/food" />
+            <item
+                android:id="@+id/listExerciseFragment"
+                android:icon="@drawable/food"
+                android:title="@string/exercise" />
+        </menu>
+
+    </item>
+
+    <item
+        android:title="@string/statistics">
+        <menu>
+            <item
+                android:id="@+id/statsDailyFragment"
+                android:icon="@drawable/food"
+                android:title="@string/daily" />
+            <item
+                android:id="@+id/statsMonthlyFragment"
+                android:icon="@drawable/food"
+                android:title="@string/monthly" />
         </menu>
 
     </item>

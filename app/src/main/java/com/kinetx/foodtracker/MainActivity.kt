@@ -22,7 +22,17 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this,R.layout.activity_main)
         drawerLayout = binding.drawerLayout
         val navController = this.findNavController(R.id.myNavHostFragment)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.logFoodFragment),drawerLayout)
+
+        val topLevelFragments = setOf(
+            R.id.homeFragment,
+            R.id.logFoodFragment,
+            R.id.logExerciseFragment,
+            R.id.listFoodFragment,
+            R.id.listExerciseFragment,
+            R.id.statsDailyFragment,
+            R.id.statsMonthlyFragment)
+
+        appBarConfiguration = AppBarConfiguration(topLevelFragments,drawerLayout)
         setupActionBarWithNavController(navController,appBarConfiguration)
         NavigationUI.setupWithNavController(binding.navDrawer,navController)
 
