@@ -11,19 +11,45 @@
 
  <androidx.constraintlayout.widget.ConstraintLayout
      android:layout_width="match_parent"
-     android:layout_height="wrap_content">
+     android:layout_height="match_parent">
+
+     <ImageView
+         android:id="@+id/modify_food_log_header"
+         android:layout_width="match_parent"
+         android:layout_height="200dp"
+         android:background="@color/azure"
+         android:src="@drawable/food"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+     <ImageView
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:layout_marginEnd="32dp"
+         android:src="@drawable/ic_baseline_arrow_back_24"
+         app:layout_constraintBottom_toBottomOf="@+id/modify_food_log_date"
+         app:layout_constraintEnd_toStartOf="@+id/modify_food_log_date"
+         app:layout_constraintTop_toTopOf="@+id/modify_food_log_date" />
 
      <com.kinetx.foodtracker.customview.CustomDateView
          android:id="@+id/modify_food_log_date"
          android:layout_width="150dp"
          android:layout_height="60dp"
-         android:layout_marginTop="32dp"
-         android:background="@color/azure"
+         android:layout_marginTop="64dp"
          app:day_c="@{modifyFoodLogVM.selectedDay}"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_header"
          app:month_c="@{modifyFoodLogVM.selectedMonth}"
          app:year_c="@{modifyFoodLogVM.selectedYear}" />
+
+     <ImageView
+         android:layout_width="30dp"
+         android:layout_height="30dp"
+         android:layout_marginStart="32dp"
+         android:src="@drawable/ic_baseline_arrow_forward_24"
+         app:layout_constraintBottom_toBottomOf="@+id/modify_food_log_date"
+         app:layout_constraintStart_toEndOf="@+id/modify_food_log_date"
+         app:layout_constraintTop_toTopOf="@+id/modify_food_log_date" />
  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

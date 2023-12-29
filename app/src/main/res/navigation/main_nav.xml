@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/modifyFoodLogFragment"
         android:name="com.kinetx.foodtracker.fragment.ModifyFoodLogFragment"
-        android:label="ModifyFoodLogFragment" >
+        android:label="Log Food" >
         <argument
             android:name="foodLogId"
             app:argType="long" />
