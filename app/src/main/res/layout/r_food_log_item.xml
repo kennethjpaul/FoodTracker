@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="56dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/ao"
+        app:layout_constraintBottom_toBottomOf="@+id/r_food_log_item_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/r_food_log_item_name" />
 
     <TextView
         android:id="@+id/r_food_log_item_name"
@@ -11,9 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textColor="@color/black"
         android:text="@string/food_name"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -22,8 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="@string/kcal"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/r_food_log_item_name"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/r_food_log_item_calorie"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -33,7 +47,17 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:text="@string/_99999"
+        android:textStyle="bold"
+        android:textSize="14sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/r_food_log_item_kcal"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
