@@ -10,19 +10,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinetx.foodtracker.R
-import com.kinetx.foodtracker.databinding.FragmentLogFoodBinding
+import com.kinetx.foodtracker.databinding.FragmentDailyFoodBinding
 import com.kinetx.foodtracker.dataclass.FoodCardItemData
 import com.kinetx.foodtracker.dataclass.FoodLogItemData
 import com.kinetx.foodtracker.enums.FoodType
 import com.kinetx.foodtracker.recyclerview.FoodCardItemR
-import com.kinetx.foodtracker.viewmodel.LogFoodVM
-import com.kinetx.foodtracker.viewmodelfactory.LogFoodVMF
+import com.kinetx.foodtracker.viewmodel.DailyFoodVM
+import com.kinetx.foodtracker.viewmodelfactory.DailyFoodVMF
 
 
-class LogFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
+class DailyFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
 
-    private lateinit var binding : FragmentLogFoodBinding
-    private lateinit var viewModel : LogFoodVM
+    private lateinit var binding : FragmentDailyFoodBinding
+    private lateinit var viewModel : DailyFoodVM
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,12 +30,12 @@ class LogFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
     ): View? {
         // Inflate the layout for this fragment
         val application = requireNotNull(this.activity).application
-        val viewModelFactory = LogFoodVMF(application)
+        val viewModelFactory = DailyFoodVMF(application)
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_log_food,container,false)
-        viewModel = ViewModelProvider(this, viewModelFactory)[LogFoodVM::class.java]
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_daily_food,container,false)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DailyFoodVM::class.java]
 
-        binding.logFoodVM = viewModel
+        binding.dailyFoodVM = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
 
@@ -75,7 +75,7 @@ class LogFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
     }
 
     override fun foodCardNavigate(foodId: Long, foodType: FoodType) {
-        view?.findNavController()?.navigate(LogFoodFragmentDirections.actionLogFoodFragmentToModifyFoodLogFragment(foodId,foodType))
+        view?.findNavController()?.navigate(DailyFoodFragmentDirections.actionLogFoodFragmentToModifyFoodLogFragment(foodId,foodType))
     }
 
 }

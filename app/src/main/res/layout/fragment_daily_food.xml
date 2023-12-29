@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="logFoodVM"
-            type="com.kinetx.foodtracker.viewmodel.LogFoodVM" />
+            name="dailyFoodVM"
+            type="com.kinetx.foodtracker.viewmodel.DailyFoodVM" />
     </data>
 
     <androidx.core.widget.NestedScrollView

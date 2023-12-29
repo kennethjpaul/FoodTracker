@@ -3,14 +3,14 @@ package com.kinetx.foodtracker.viewmodelfactory
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kinetx.foodtracker.viewmodel.LogFoodVM
+import com.kinetx.foodtracker.viewmodel.DailyFoodVM
 
-class LogFoodVMF(val application: Application): ViewModelProvider.Factory {
+class DailyFoodVMF(val application: Application): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LogFoodVM::class.java))
+        if (modelClass.isAssignableFrom(DailyFoodVM::class.java))
         {
-            return LogFoodVM(application) as T
+            return DailyFoodVM(application) as T
         }
         throw IllegalArgumentException("LogFoodVMF: Unknown view model")
     }

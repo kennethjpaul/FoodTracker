@@ -10,15 +10,15 @@
         android:label="Home" />
     <fragment
         android:id="@+id/logFoodFragment"
-        android:name="com.kinetx.foodtracker.fragment.LogFoodFragment"
-        android:label="Log Food" >
+        android:name="com.kinetx.foodtracker.fragment.DailyFoodFragment"
+        android:label="Daily Food" >
         <action
             android:id="@+id/action_logFoodFragment_to_modifyFoodLogFragment"
             app:destination="@id/modifyFoodLogFragment" />
     </fragment>
     <fragment
         android:id="@+id/logExerciseFragment"
-        android:name="com.kinetx.foodtracker.fragment.LogExerciseFragment"
+        android:name="com.kinetx.foodtracker.fragment.DailyExerciseFragment"
         android:label="Log Exercise" />
     <fragment
         android:id="@+id/listFoodFragment"

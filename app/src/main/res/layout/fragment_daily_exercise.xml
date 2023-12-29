@@ -4,14 +4,14 @@
 
     <data>
         <variable
-            name="logExerciseVM"
-            type="com.kinetx.foodtracker.viewmodel.LogExerciseVM" />
+            name="dailyExerciseVM"
+            type="com.kinetx.foodtracker.viewmodel.DailyExerciseVM" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.LogExerciseFragment">
+        tools:context=".fragment.DailyExerciseFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
