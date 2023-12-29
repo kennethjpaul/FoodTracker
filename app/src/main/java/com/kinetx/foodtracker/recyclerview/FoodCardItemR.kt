@@ -47,19 +47,19 @@ class FoodCardItemR: RecyclerView.Adapter<FoodCardItemR.MyViewHolder>(),FoodLogI
         {
             FoodType.BREAKFAST-> {
                 holder.cardTitle.text = "Breakfast"
-                holder.cardColor.setBackgroundColor(Color.RED)
+                holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFF3498DB").toInt())
             }
             FoodType.LUNCH -> {
                 holder.cardTitle.text = "Lunch"
-                holder.cardColor.setBackgroundColor(Color.CYAN)
+                holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFF16A085").toInt())
             }
             FoodType.SNACKS -> {
                 holder.cardTitle.text = "Snacks"
-                holder.cardColor.setBackgroundColor(Color.GREEN)
+                holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFFC0392B").toInt())
             }
             FoodType.DINNER -> {
                 holder.cardTitle.text = "Dinner"
-                holder.cardColor.setBackgroundColor(Color.BLUE)
+                holder.cardColor.setBackgroundColor(java.lang.Long.decode("0xFF8E44AD").toInt())
             }
         }
 
