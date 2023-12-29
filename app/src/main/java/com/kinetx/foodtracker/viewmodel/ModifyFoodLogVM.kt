@@ -15,11 +15,27 @@ import com.kinetx.foodtracker.helpers.HelperFunctions
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
 
 
-    private val spinnerValueList = listOf("Breakfast","Lunch","Snacks","Dinner")
+    private val spinnerFoodTypeList = listOf("Breakfast","Lunch","Snacks","Dinner")
 
     private val _foodTypeSpinnerSelected = MutableLiveData<Int>()
     val foodTypeSpinnerSelected : LiveData<Int>
         get() = _foodTypeSpinnerSelected
+
+    private val _foodTypeSpinner = MutableLiveData<List<String>>()
+    val foodTypeSpinner : LiveData<List<String>>
+        get() = _foodTypeSpinner
+
+
+    private val spinnerUnitList = listOf("g","ml")
+
+    private val _foodUnitSpinnerSelected = MutableLiveData<Int>()
+    val foodUnitSpinnerSelected : LiveData<Int>
+        get() = _foodUnitSpinnerSelected
+
+    private val _foodUnitSpinner = MutableLiveData<List<String>>()
+    val foodUnitSpinner : LiveData<List<String>>
+        get() = _foodUnitSpinner
+
 
     private val _selectedDay = MutableLiveData<String>()
     val selectedDay : LiveData<String>
@@ -38,9 +54,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         get() = _fragmentTitle
 
 
-    private val _foodTypeSpinner = MutableLiveData<List<String>>()
-    val foodTypeSpinner : LiveData<List<String>>
-        get() = _foodTypeSpinner
+
 
     private var myCalendar : Calendar = Calendar.getInstance()
 
@@ -52,7 +66,8 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
 
-        _foodTypeSpinner.value = spinnerValueList
+        _foodTypeSpinner.value = spinnerFoodTypeList
+        _foodUnitSpinner.value = spinnerUnitList
 
         _foodTypeSpinnerSelected.value = when(args.foodType)
         {
@@ -62,6 +77,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             FoodType.DINNER -> 3
         }
 
+        _foodUnitSpinnerSelected.value = 0
     }
 
 

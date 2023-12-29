@@ -69,34 +69,19 @@
 
      <com.google.android.material.card.MaterialCardView
          android:id="@+id/modify_food_log_selected_card"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginStart="16dp"
-         android:layout_marginTop="24dp"
-         android:layout_marginEnd="16dp"
-         app:cardBackgroundColor="@color/white"
-         app:cardElevation="2dp"
-         app:cardCornerRadius="2dp"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_spinner">
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_spinner"
+         style="@style/material_card">
 
-         <androidx.constraintlayout.widget.ConstraintLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:padding="16dp">
+         <androidx.constraintlayout.widget.ConstraintLayout style="@style/material_card_constraint">
 
              <TextView
                  android:id="@+id/modify_food_log_selected_title"
-                 android:layout_width="wrap_content"
-                 android:layout_height="56dp"
-                 android:gravity="center"
                  android:text="@string/selected_food"
-                 android:textSize="16sp"
-                 android:textStyle="bold"
-                 android:textColor="@color/black"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toTopOf="parent" />
+                 app:layout_constraintTop_toTopOf="parent"
+                 style="@style/material_card_title" />
 
              <ImageView
                  android:id="@+id/modify_food_log_selected_edit"
@@ -140,5 +125,62 @@
 
          </androidx.constraintlayout.widget.ConstraintLayout>
      </com.google.android.material.card.MaterialCardView>
+
+     <com.google.android.material.card.MaterialCardView
+         android:id="@+id/modify_food_log_details_card"
+         style="@style/material_card"
+         android:layout_marginStart="16dp"
+         android:layout_marginEnd="16dp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_selected_card">
+
+         <androidx.constraintlayout.widget.ConstraintLayout style="@style/material_card_constraint">
+
+             <TextView
+                 android:id="@+id/modify_food_log_details_title"
+                 style="@style/material_card_title"
+                 android:text="Food Details"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+             <View
+                 android:id="@+id/view"
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:background="@color/ao"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_details_title" />
+
+             <EditText
+                 android:id="@+id/modify_food_log_details_value"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="8dp"
+                 android:backgroundTint="@color/ao"
+                 android:textAlignment="textEnd"
+                 android:inputType="numberDecimal"
+                 android:textColor="@color/black"
+                 android:ems="5"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_details_title" />
+
+             <Spinner
+                 android:id="@+id/modify_food_log_details_unit"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="8dp"
+                 android:theme="@style/ThemeOverlay.Material3.Light"
+                 android:entries="@{modifyFoodLogVM.foodUnitSpinner}"
+                 android:selectedItemPosition="@{modifyFoodLogVM.foodUnitSpinnerSelected}"
+                 app:layout_constraintBottom_toBottomOf="@+id/modify_food_log_details_value"
+                 app:layout_constraintStart_toEndOf="@+id/modify_food_log_details_value"
+                 app:layout_constraintTop_toTopOf="@+id/modify_food_log_details_value" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+     </com.google.android.material.card.MaterialCardView>
+
  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
