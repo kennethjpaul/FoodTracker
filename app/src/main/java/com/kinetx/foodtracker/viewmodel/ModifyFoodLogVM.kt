@@ -3,7 +3,6 @@ package com.kinetx.foodtracker.viewmodel
 import android.app.Application
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -12,12 +11,14 @@ import androidx.lifecycle.viewModelScope
 import com.kinetx.foodtracker.database.DatabaseMain
 import com.kinetx.foodtracker.database.DatabaseRepository
 import com.kinetx.foodtracker.database.FoodDB
+import com.kinetx.foodtracker.database.FoodLogDB
 import com.kinetx.foodtracker.enums.FoodType
 import com.kinetx.foodtracker.fragment.ModifyFoodLogFragmentArgs
 import com.kinetx.foodtracker.helpers.HelperFunctions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.security.KeyStore
+import java.lang.Math.round
+import kotlin.math.roundToInt
 
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
 
@@ -76,6 +77,12 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     private var myCalendar : Calendar = Calendar.getInstance()
 
 
+    //
+
+    private val _foodLogDB = MutableLiveData<FoodLogDB>()
+    val foodLogDB : LiveData<FoodLogDB>
+        get() = _foodLogDB
+
 
     /// Selected Food
     private val _foodDb = MutableLiveData<FoodDB>()
@@ -96,6 +103,11 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         get() = _selectedFoodDesc
 
 
+    // Food details
+
+    var foodQuantity = MutableLiveData<String>()
+
+
     // Circular bar
 
     private val _carbPercent = MutableLiveData<String>()
@@ -110,6 +122,23 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     val fatPercent : LiveData<String>
         get() = _fatPercent
 
+    // Food stats
+
+    var foodCalories = MutableLiveData<String>()
+    var foodCarbs = MutableLiveData<String>()
+    var foodFiber = MutableLiveData<String>()
+    var foodSugar = MutableLiveData<String>()
+    var foodProtein = MutableLiveData<String>()
+    var foodFat = MutableLiveData<String>()
+    var foodFatSat = MutableLiveData<String>()
+    var foodFatUnSat = MutableLiveData<String>()
+    var foodCholesterol = MutableLiveData<String>()
+    var foodSodium = MutableLiveData<String>()
+    var foodPotassium = MutableLiveData<String>()
+    var foodIron = MutableLiveData<String>()
+    var foodVitaminD = MutableLiveData<String>()
+
+
 
     private val repository : DatabaseRepository
 
@@ -118,6 +147,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         val userDao = DatabaseMain.getInstance(application).databaseDao
         repository = DatabaseRepository(userDao)
 
+
          _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
@@ -125,9 +155,9 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _foodTypeSpinner.value = spinnerFoodTypeList
         _foodUnitSpinner.value = spinnerUnitList
 
-        _carbPercent.value="0.0"
-        _proteinPercent.value="0.0"
-        _fatPercent.value="0.0"
+        initializeValues()
+
+
 
         _foodTypeSpinnerSelected.value = when(args.foodType)
         {
@@ -142,22 +172,45 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             {
                _isCreateVisible.value = View.VISIBLE
                _isEditVisible.value = View.GONE
-                _selectedFoodId.value = -1L
-                _selectedFoodName.value = ""
-                _selectedFoodDesc.value = ""
             }
             else->
             {
                 _isCreateVisible.value = View.GONE
                 _isEditVisible.value = View.VISIBLE
-                _selectedFoodId.value = -1L  // TODO
-                _selectedFoodName.value = "" // TODO
-                _selectedFoodDesc.value = "" // TODO
+                viewModelScope.launch(Dispatchers.IO)
+                {
+                    _foodLogDB.postValue(repository.getFoodLogWithId(args.foodLogId))
+                }
             }
         }
 
 
         _foodUnitSpinnerSelected.value = 0
+    }
+
+    private fun initializeValues() {
+        foodQuantity.value=""
+        _carbPercent.value="0.0"
+        _proteinPercent.value="0.0"
+        _fatPercent.value="0.0"
+        _foodLogDB.value = FoodLogDB()
+        _selectedFoodId.value = -1L
+        _selectedFoodName.value = ""
+        _selectedFoodDesc.value = ""
+        foodCalories.value = "0.0 Kcal"
+        foodCarbs.value = "0.0 g"
+        foodFiber.value = "0.0 g"
+        foodSugar.value = "0.0 g"
+        foodProtein.value = "0.0 g"
+        foodFat.value = "0.0 g"
+        foodFatSat.value = "0.0 g"
+        foodFatUnSat.value = "0.0 g"
+        foodCholesterol.value = "0.0 g"
+        foodSodium.value = "0.0 g"
+        foodPotassium.value = "0.0 g"
+        foodIron.value = "0.0 g"
+        foodVitaminD.value = "0.0 g"
+
     }
 
 
@@ -215,5 +268,28 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             _fatPercent.value = (f/(c+p+f)*100).toString()
         }
 
+        updateFoodNutrition()
+
+    }
+
+    fun updateFoodNutrition()
+    {
+        val m = HelperFunctions.convertToFloat(foodQuantity.value!!)
+        val n = _foodDb.value?.foodServingSize
+        val scale = m.div(n!!)
+
+        foodCalories.value = (scale * _foodDb.value?.foodCalories!!).roundToInt().toString()+" Kcal"
+        foodCarbs.value = (scale* _foodDb.value?.foodCarbs!!).roundToInt().toString()+" g"
+        foodFiber.value = (scale* _foodDb.value?.foodFiber!!).roundToInt().toString()+" g"
+        foodSugar.value = (scale* _foodDb.value?.foodSugar!!).roundToInt().toString()+" g"
+        foodProtein.value = (scale* _foodDb.value?.foodProtein!!).roundToInt().toString()+" g"
+        foodFat.value = (scale* _foodDb.value?.foodFat!!).roundToInt().toString()+" g"
+        foodFatSat.value = (scale* _foodDb.value?.foodFatSat!!).roundToInt().toString()+" g"
+        foodFatUnSat.value = (scale* _foodDb.value?.foodFatUnSat!!).roundToInt().toString()+" g"
+        foodCholesterol.value = (scale* _foodDb.value?.foodCholesterol!!).roundToInt().toString()+" g"
+        foodSodium.value = (scale* _foodDb.value?.foodSodium!!).roundToInt().toString()+" g"
+        foodPotassium.value = (scale* _foodDb.value?.foodPotassium!!).roundToInt().toString()+" g"
+        foodIron.value = (scale* _foodDb.value?.foodIron!!).roundToInt().toString()+" g"
+        foodVitaminD.value = (scale* _foodDb.value?.foodVitaminD!!).roundToInt().toString()+" g"
     }
 }

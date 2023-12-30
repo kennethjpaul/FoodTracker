@@ -1,6 +1,7 @@
 package com.kinetx.foodtracker.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -61,6 +62,15 @@ class ModifyFoodLogFragment : Fragment() {
         viewModel.foodDb.observe(viewLifecycleOwner)
         {
             viewModel.updateInterface()
+        }
+
+        viewModel.foodQuantity.observe(viewLifecycleOwner)
+        {
+            if(viewModel.foodDb.value?.foodId!=null)
+            {
+                viewModel.updateFoodNutrition()
+            }
+
         }
 
 

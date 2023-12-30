@@ -38,11 +38,28 @@ class DailyFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
         binding.dailyFoodVM = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        val breakfastM : ArrayList<FoodLogItemData> = ArrayList()
+        val lunchM : ArrayList<FoodLogItemData> = ArrayList()
+        val snacksM : ArrayList<FoodLogItemData> = ArrayList()
+        val dinnerM : ArrayList<FoodLogItemData> = ArrayList()
+
+
+        val foodCard : ArrayList<FoodCardItemData> = ArrayList()
+
+        foodCard.add(FoodCardItemData(FoodType.BREAKFAST,200F,breakfastM))
+        foodCard.add(FoodCardItemData(FoodType.LUNCH,100F,lunchM))
+        foodCard.add(FoodCardItemData(FoodType.SNACKS,2000F,snacksM))
+        foodCard.add(FoodCardItemData(FoodType.DINNER,20F,dinnerM))
+
         val adapter = FoodCardItemR(this)
 
         binding.foodLogRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.foodLogRecyclerview.setHasFixedSize(true)
         binding.foodLogRecyclerview.adapter = adapter
+
+
+        adapter.setData(foodCard)
 
         return binding.root
     }
