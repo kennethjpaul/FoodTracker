@@ -22,9 +22,9 @@ class DatabaseRepository (private val databaseDao: DatabaseDao) {
         databaseDao.deleteFood(foodDB)
     }
 
-    suspend fun getFoodWithId(foodId:Long)
+    suspend fun getFoodWithId(foodId:Long) : FoodDB
     {
-        databaseDao.getFoodWithId(foodId)
+        return databaseDao.getFoodWithId(foodId)
     }
 
 
@@ -43,14 +43,14 @@ class DatabaseRepository (private val databaseDao: DatabaseDao) {
         databaseDao.deleteFoodLog(foodLogDB)
     }
 
-    suspend fun getFoodLogWithId(foodLogId: Long)
+    suspend fun getFoodLogWithId(foodLogId: Long) : FoodLogDB
     {
-        databaseDao.getFoodLogWithId(foodLogId)
+        return databaseDao.getFoodLogWithId(foodLogId)
     }
 
-    fun getAllFoodLogWithDate(foodDate:Long)
+    fun getAllFoodLogWithDate(foodDate:Long) : LiveData<List<FoodLogDB>>
     {
-        databaseDao.getAllFoodLogWithDate(foodDate)
+        return databaseDao.getAllFoodLogWithDate(foodDate)
     }
 
     suspend fun deleteFoodLogWithFood(foodId:Long)

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentListFoodBinding
+import com.kinetx.foodtracker.dataclass.FoodItemData
 import com.kinetx.foodtracker.recyclerview.FoodItemR
 import com.kinetx.foodtracker.viewmodel.ListFoodVM
 import com.kinetx.foodtracker.viewmodelfactory.ListFoodVMF
@@ -48,18 +49,23 @@ class ListFoodFragment : Fragment(), FoodItemR.OnSelectFoodItem {
         }
 
 
-        viewModel.foodList.observe(viewLifecycleOwner)
-        {
-            adapter.setData(it)
-        }
 
+        viewModel.foodDbQuery.observe(viewLifecycleOwner)
+        {
+            viewModel.foodList = it.map {
+                FoodItemData(it.foodId,it.foodName,it.foodDesc)
+            }
+
+            adapter.setData(viewModel.foodList)
+
+        }
 
         return binding.root
     }
 
     override fun onSelectFoodItemClick(position: Int) {
 
-        val foodId = viewModel.foodList.value?.get(position)!!.foodId
+        val foodId = viewModel.foodList[position].foodId
         view?.findNavController()?.navigate(ListFoodFragmentDirections.actionListFoodFragmentToModifyFoodFragment(foodId))
 
     }

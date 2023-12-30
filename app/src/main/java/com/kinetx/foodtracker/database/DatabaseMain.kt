@@ -29,7 +29,6 @@ abstract class DatabaseMain : RoomDatabase(){
                         "main_database"
                     )
                         .fallbackToDestructiveMigration()
-                        .createFromAsset("database/main.db")
                         .build()
 
                     INSTANCE = instance
