@@ -175,7 +175,7 @@
 
                         <EditText
                             android:id="@+id/modify_food_stats_calories"
-                            style="@style/material_card_subtitle"
+                            style="@style/material_card_edit_subtitle"
                             android:ems="4"
                             android:textColorHint="@color/black"
                             android:textAlignment="textEnd"
