@@ -11,8 +11,10 @@ import androidx.lifecycle.MutableLiveData
 import com.kinetx.foodtracker.enums.FoodType
 import com.kinetx.foodtracker.fragment.ModifyFoodLogFragmentArgs
 import com.kinetx.foodtracker.helpers.HelperFunctions
+import java.security.KeyStore
 
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
+
 
 
     private val spinnerFoodTypeList = listOf("Breakfast","Lunch","Snacks","Dinner")
@@ -35,6 +37,18 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     private val _foodUnitSpinner = MutableLiveData<List<String>>()
     val foodUnitSpinner : LiveData<List<String>>
         get() = _foodUnitSpinner
+
+
+
+    private val _isEditVisible = MutableLiveData<Int>()
+    val isEditVisible : LiveData<Int>
+        get() = _isEditVisible
+
+    private val _isCreateVisible = MutableLiveData<Int>()
+    val isCreateVisible : LiveData<Int>
+        get() = _isCreateVisible
+
+
 
 
     private val _selectedDay = MutableLiveData<String>()
@@ -76,6 +90,20 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             FoodType.SNACKS -> 2
             FoodType.DINNER -> 3
         }
+        when(args.foodLogId)
+        {
+            -1L->
+            {
+               _isCreateVisible.value = View.VISIBLE
+               _isEditVisible.value = View.GONE
+            }
+            else->
+            {
+                _isCreateVisible.value = View.GONE
+                _isEditVisible.value = View.VISIBLE
+            }
+        }
+
 
         _foodUnitSpinnerSelected.value = 0
     }

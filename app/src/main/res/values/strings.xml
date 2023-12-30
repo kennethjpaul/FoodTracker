@@ -52,4 +52,7 @@
     <string name="potassium">Potassium</string>
     <string name="iron">Iron</string>
     <string name="vitamin_d">Vitamin D</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="add">Add</string>
 </resources>

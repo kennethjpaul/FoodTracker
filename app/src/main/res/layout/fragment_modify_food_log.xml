@@ -485,9 +485,46 @@
          </androidx.constraintlayout.widget.ConstraintLayout>
      </com.google.android.material.card.MaterialCardView>
 
+
+
+     <Button
+         android:id="@+id/modify_food_log_create_btn"
+         style="@style/button_normal"
+         android:layout_marginTop="40dp"
+         android:backgroundTint="@color/azure"
+         android:text="@string/add"
+         android:visibility="@{modifyFoodLogVM.isCreateVisible()}"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_card" />
+
+     <Button
+         android:id="@+id/modify_food_log_update_btn"
+         style="@style/button_normal"
+         android:backgroundTint="@color/ao"
+         android:layout_marginTop="40dp"
+         android:text="@string/update"
+         android:visibility="@{modifyFoodLogVM.isEditVisible()}"
+         app:layout_constraintEnd_toStartOf="@+id/modify_food_log_delete_btn"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_card" />
+
+     <Button
+         android:id="@+id/modify_food_log_delete_btn"
+         style="@style/button_normal"
+         android:backgroundTint="@color/red"
+         android:layout_marginTop="40dp"
+         android:text="@string/delete"
+         android:visibility="@{modifyFoodLogVM.isEditVisible()}"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toEndOf="@+id/modify_food_log_update_btn"
+         app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_card" />
+
+
+
      <Space
          android:layout_width="match_parent"
-         android:layout_height="50dp"
+         android:layout_height="125dp"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_card"/>
