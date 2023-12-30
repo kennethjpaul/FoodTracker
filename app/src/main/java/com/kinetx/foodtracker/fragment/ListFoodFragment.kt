@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentListFoodBinding
 import com.kinetx.foodtracker.viewmodel.ListFoodVM
@@ -32,6 +33,11 @@ class ListFoodFragment : Fragment() {
         binding.listFoodVM = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        binding.listFoodBtn.setOnClickListener()
+        {
+            view?.findNavController()?.navigate(ListFoodFragmentDirections.actionListFoodFragmentToModifyFoodFragment(-1L))
+        }
         // Inflate the layout for this fragment
         return binding.root
     }
