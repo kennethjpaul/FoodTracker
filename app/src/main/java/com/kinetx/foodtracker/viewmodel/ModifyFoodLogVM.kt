@@ -67,10 +67,23 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     val fragmentTitle : LiveData<String>
         get() = _fragmentTitle
 
-
-
-
     private var myCalendar : Calendar = Calendar.getInstance()
+
+
+
+    /// Selected Food
+
+    private val _selectedFoodId = MutableLiveData<Long>()
+    val selectedFoodId : LiveData<Long>
+        get() = _selectedFoodId
+
+    private val _selectedFoodName = MutableLiveData<String>()
+    val selectedFoodName : LiveData<String>
+        get() = _selectedFoodName
+
+    private val _selectedFoodDesc = MutableLiveData<String>()
+    val selectedFoodDesc : LiveData<String>
+        get() = _selectedFoodDesc
 
     init {
         Log.i("III id",args.foodLogId.toString())
@@ -96,11 +109,17 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             {
                _isCreateVisible.value = View.VISIBLE
                _isEditVisible.value = View.GONE
+                _selectedFoodId.value = -1L
+                _selectedFoodName.value = ""
+                _selectedFoodDesc.value = ""
             }
             else->
             {
                 _isCreateVisible.value = View.GONE
                 _isEditVisible.value = View.VISIBLE
+                _selectedFoodId.value = -1L  // TODO
+                _selectedFoodName.value = "" // TODO
+                _selectedFoodDesc.value = "" // TODO
             }
         }
 
@@ -137,5 +156,11 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
+    }
+
+    fun updateSelectedFood(foodId: Long, foodName: String, foodDesc: String) {
+        _selectedFoodId.value = foodId
+        _selectedFoodName.value = foodName
+        _selectedFoodDesc.value = foodDesc
     }
 }

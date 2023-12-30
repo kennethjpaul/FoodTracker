@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.kinetx.foodtracker.R
@@ -55,6 +56,23 @@ class ModifyFoodLogFragment : Fragment() {
         {
             viewModel.changeDate(-1)
         }
+
+
+
+
+
+        setFragmentResultListener("SelectedFood")
+        { _, bundle ->
+            val foodId = bundle.getLong("foodId")
+            val foodName = bundle.getString("foodName")
+            val foodDesc = bundle.getString("foodDesc")
+            if (foodName != null && foodDesc!=null) {
+                viewModel.updateSelectedFood(foodId,foodName,foodDesc)
+            }
+
+        }
+
+
 
         // Inflate the layout for this fragment
         return binding.root

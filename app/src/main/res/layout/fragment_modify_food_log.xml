@@ -114,6 +114,7 @@
                  android:textColor="@color/black"
                  android:textSize="14sp"
                  android:textStyle="bold"
+                 android:text="@{modifyFoodLogVM.selectedFoodName}"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@id/modify_food_log_selected_title" />
 
@@ -124,6 +125,7 @@
                  android:layout_marginTop="4dp"
                  android:textColor="@color/black"
                  android:textSize="12sp"
+                 android:text="@{modifyFoodLogVM.selectedFoodDesc}"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@id/modify_food_log_selected_name" />
 
