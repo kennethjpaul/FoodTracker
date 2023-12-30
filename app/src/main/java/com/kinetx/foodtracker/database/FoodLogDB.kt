@@ -16,7 +16,7 @@ data class FoodLogDB(
     @ColumnInfo(name = "food_type")
     var foodType : FoodType = FoodType.BREAKFAST,
 
-    @ColumnInfo(name = "food_fate")
+    @ColumnInfo(name = "food_date")
     var foodDate : Long = -1L,
 
     @ColumnInfo(name = "food_quantity")
