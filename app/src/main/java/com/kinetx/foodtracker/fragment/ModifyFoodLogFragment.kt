@@ -58,6 +58,17 @@ class ModifyFoodLogFragment : Fragment() {
         }
 
 
+        viewModel.foodDb.observe(viewLifecycleOwner)
+        {
+            viewModel.updateInterface()
+        }
+
+
+
+
+
+
+
 
 
 

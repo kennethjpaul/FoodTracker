@@ -8,9 +8,15 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.kinetx.foodtracker.database.DatabaseMain
+import com.kinetx.foodtracker.database.DatabaseRepository
+import com.kinetx.foodtracker.database.FoodDB
 import com.kinetx.foodtracker.enums.FoodType
 import com.kinetx.foodtracker.fragment.ModifyFoodLogFragmentArgs
 import com.kinetx.foodtracker.helpers.HelperFunctions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.security.KeyStore
 
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
@@ -72,6 +78,10 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
 
 
     /// Selected Food
+    private val _foodDb = MutableLiveData<FoodDB>()
+    val foodDb : LiveData<FoodDB>
+        get() = _foodDb
+
 
     private val _selectedFoodId = MutableLiveData<Long>()
     val selectedFoodId : LiveData<Long>
@@ -85,16 +95,39 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     val selectedFoodDesc : LiveData<String>
         get() = _selectedFoodDesc
 
-    init {
-        Log.i("III id",args.foodLogId.toString())
-        Log.i("III food type",args.foodType.toString())
 
-        _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
+    // Circular bar
+
+    private val _carbPercent = MutableLiveData<String>()
+    val carbPercent : LiveData<String>
+        get() = _carbPercent
+
+    private val _proteinPercent = MutableLiveData<String>()
+    val proteinPercent : LiveData<String>
+        get() = _proteinPercent
+
+    private val _fatPercent = MutableLiveData<String>()
+    val fatPercent : LiveData<String>
+        get() = _fatPercent
+
+
+    private val repository : DatabaseRepository
+
+    init {
+
+        val userDao = DatabaseMain.getInstance(application).databaseDao
+        repository = DatabaseRepository(userDao)
+
+         _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
 
         _foodTypeSpinner.value = spinnerFoodTypeList
         _foodUnitSpinner.value = spinnerUnitList
+
+        _carbPercent.value="0.0"
+        _proteinPercent.value="0.0"
+        _fatPercent.value="0.0"
 
         _foodTypeSpinnerSelected.value = when(args.foodType)
         {
@@ -162,5 +195,25 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _selectedFoodId.value = foodId
         _selectedFoodName.value = foodName
         _selectedFoodDesc.value = foodDesc
+
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            val tmp = repository.getFoodWithId(foodId)
+            _foodDb.postValue(tmp)
+        }
+    }
+
+    fun updateInterface() {
+
+        val c = _foodDb.value?.foodCarbs
+        val p = _foodDb.value?.foodProtein
+        val f = _foodDb.value?.foodFat
+
+        if (c != null && p!=null && f!=null) {
+            _carbPercent.value = (c/(c+p+f)*100).toString()
+            _proteinPercent.value = (p/(c+p+f)*100).toString()
+            _fatPercent.value = (f/(c+p+f)*100).toString()
+        }
+
     }
 }

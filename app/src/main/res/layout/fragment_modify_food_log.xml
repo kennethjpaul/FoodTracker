@@ -220,7 +220,7 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_1"
                  app:seekBarColor="@color/red"
-                 app:seekPercentage="50" />
+                 app:seekPercentage="@{modifyFoodLogVM.carbPercent}" />
 
              <TextView
                  style="@style/material_card_subtitle"
@@ -239,7 +239,7 @@
                  app:layout_constraintStart_toEndOf="@+id/modify_food_log_stats_percent_carbs"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_1"
                  app:seekBarColor="@color/azure"
-                 app:seekPercentage="20" />
+                 app:seekPercentage="@{modifyFoodLogVM.proteinPercent}" />
 
              <TextView
                  style="@style/material_card_subtitle"
@@ -258,7 +258,7 @@
                  app:layout_constraintStart_toEndOf="@+id/modify_food_log_stats_percent_protein"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_1"
                  app:seekBarColor="@color/ao"
-                 app:seekPercentage="30" />
+                 app:seekPercentage="@{modifyFoodLogVM.fatPercent}" />
 
              <TextView
                  style="@style/material_card_subtitle"

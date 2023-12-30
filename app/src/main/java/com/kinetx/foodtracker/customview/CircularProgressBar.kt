@@ -10,7 +10,10 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.toColorInt
+import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import com.kinetx.foodtracker.R
+import kotlin.math.round
 
 class CircularProgressBar@JvmOverloads constructor(
     context: Context,
@@ -42,7 +45,7 @@ class CircularProgressBar@JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.CircularProgressBar)
         {
             paintOuter.color = getString(R.styleable.CircularProgressBar_seekBarColor).toString().toColorInt()
-            percentage = getString(R.styleable.CircularProgressBar_seekPercentage).toString().toFloat()
+//            percentage = getString(R.styleable.CircularProgressBar_seekPercentage).toString().toFloat()
         }
 
     }
@@ -57,7 +60,9 @@ class CircularProgressBar@JvmOverloads constructor(
         super.onDraw(canvas)
         val sweepAngle = (percentage/100*360)
         val textSize = (minOf(width,height)/6).toFloat()
-        val textCenter = "$percentage %"
+        val roundedPercent = round(percentage*100)/100
+
+        val textCenter = "$roundedPercent %"
         val textVertical = (height/2).toFloat() + textSize/2
         paintText.textSize = textSize
 
@@ -66,4 +71,16 @@ class CircularProgressBar@JvmOverloads constructor(
         canvas?.drawText(textCenter,(width/2).toFloat(),textVertical,paintText)
 
     }
+
+    fun setPercentageText(p: String)
+    {
+        percentage = p.toFloat()
+        invalidate()
+    }
+}
+
+@BindingAdapter("seekPercentage")
+fun setPercentage(view: CircularProgressBar, text : LiveData<String>)
+{
+    view.setPercentageText(text.value.toString())
 }
