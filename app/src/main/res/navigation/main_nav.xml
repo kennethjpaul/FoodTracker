@@ -23,7 +23,11 @@
     <fragment
         android:id="@+id/listFoodFragment"
         android:name="com.kinetx.foodtracker.fragment.ListFoodFragment"
-        android:label="List Food" />
+        android:label="List Food" >
+        <action
+            android:id="@+id/action_listFoodFragment_to_modifyFoodFragment"
+            app:destination="@id/modifyFoodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/listExerciseFragment"
         android:name="com.kinetx.foodtracker.fragment.ListExerciseFragment"
@@ -50,5 +54,13 @@
         <argument
             android:name="foodType"
             app:argType="com.kinetx.foodtracker.enums.FoodType" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyFoodFragment"
+        android:name="com.kinetx.foodtracker.fragment.ModifyFoodFragment"
+        android:label="ModifyFoodFragment" >
+        <argument
+            android:name="foodId"
+            app:argType="long" />
     </fragment>
 </navigation>

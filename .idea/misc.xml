@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_list_food.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_log_exercise.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_log_food.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_modify_food.xml" value="0.24864130434782608" />
         <entry key="app/src/main/res/layout/fragment_modify_food_log.xml" value="0.29039070749736007" />
         <entry key="app/src/main/res/layout/fragment_stats_daily.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_stats_monthly.xml" value="0.2864583333333333" />
