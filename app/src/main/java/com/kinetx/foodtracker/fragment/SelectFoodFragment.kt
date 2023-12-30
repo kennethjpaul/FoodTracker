@@ -44,6 +44,12 @@ class SelectFoodFragment : Fragment(), FoodItemR.OnSelectFoodItem {
         binding.selectFoodRecycler.adapter = adapter
 
 
+        binding.selectFoodCreate.setOnClickListener()
+        {
+            view?.findNavController()?.navigate(SelectFoodFragmentDirections.actionSelectFoodFragmentToModifyFoodFragment(-1))
+        }
+
+
         viewModel.foodList.observe(viewLifecycleOwner)
         {
             adapter.setData(it)
