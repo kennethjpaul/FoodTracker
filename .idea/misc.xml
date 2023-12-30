@@ -14,10 +14,12 @@
         <entry key="app/src/main/res/layout/fragment_log_food.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_modify_food.xml" value="0.24864130434782608" />
         <entry key="app/src/main/res/layout/fragment_modify_food_log.xml" value="0.29039070749736007" />
+        <entry key="app/src/main/res/layout/fragment_select_food.xml" value="0.2489868287740628" />
         <entry key="app/src/main/res/layout/fragment_stats_daily.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_stats_monthly.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/r_food_card.xml" value="0.1814814814814815" />
+        <entry key="app/src/main/res/layout/r_food_item.xml" value="0.75" />
         <entry key="app/src/main/res/layout/r_food_log_item.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/menu/navdrawer_menu.xml" value="0.267578125" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.2864583333333333" />

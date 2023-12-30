@@ -54,6 +54,9 @@
         <argument
             android:name="foodType"
             app:argType="com.kinetx.foodtracker.enums.FoodType" />
+        <action
+            android:id="@+id/action_modifyFoodLogFragment_to_selectFoodFragment"
+            app:destination="@id/selectFoodFragment" />
     </fragment>
     <fragment
         android:id="@+id/modifyFoodFragment"
@@ -63,4 +66,8 @@
             android:name="foodId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/selectFoodFragment"
+        android:name="com.kinetx.foodtracker.fragment.SelectFoodFragment"
+        android:label="SelectFoodFragment" />
 </navigation>

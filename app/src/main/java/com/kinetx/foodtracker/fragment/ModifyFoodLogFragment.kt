@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentModifyFoodLogBinding
 import com.kinetx.foodtracker.viewmodel.ModifyFoodLogVM
@@ -35,6 +36,11 @@ class ModifyFoodLogFragment : Fragment() {
         binding.modifyFoodLogVM = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        binding.modifyFoodLogSelectedEdit.setOnClickListener()
+        {
+            view?.findNavController()?.navigate(ModifyFoodLogFragmentDirections.actionModifyFoodLogFragmentToSelectFoodFragment())
+        }
 
         binding.modifyFoodLogDate.setOnClickListener()
         {
