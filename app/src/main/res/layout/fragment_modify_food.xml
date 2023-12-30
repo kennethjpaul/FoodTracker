@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,16 +9,391 @@
             type="com.kinetx.foodtracker.viewmodel.ModifyFoodVM" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.ModifyFoodFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/modify_food_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/azure"
+                    android:src="@drawable/food"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/modify_food_details_card"
+                    style="@style/material_card"
+                    android:layout_marginTop="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/modify_food_header">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout style="@style/material_card_constraint">
+
+                        <TextView
+                            android:id="@+id/modify_food_details_title"
+                            style="@style/material_card_title"
+                            android:text="@string/food_details"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="@color/azure"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_details_title" />
+
+                        <EditText
+                            android:id="@+id/modify_food_name"
+                            style="@style/material_card_edit_subtitle"
+                            android:hint="@string/food_name"
+                            android:textAlignment="textStart"
+                            android:inputType="text"
+                            android:layout_width="match_parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/modify_food_details_title" />
+
+                        <EditText
+                            android:id="@+id/modify_food_desc"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/food_description"
+                            android:textAlignment="textStart"
+                            android:inputType="textMultiLine"
+                            android:maxLines="5"
+                            android:layout_width="match_parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/modify_food_name" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/modify_food_stats_card"
+                    style="@style/material_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/modify_food_details_card">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout style="@style/material_card_constraint">
+
+                        <TextView
+                            android:id="@+id/modify_food_stats_title"
+                            style="@style/material_card_title"
+                            android:text="@string/food_stats"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/modify_food_stats_sep_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="@color/red"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_title" />
+
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            style="@style/material_card_subtitle"
+                            android:text="@string/calories"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_calories"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_calories" />
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_calories"
+                            style="@style/material_card_subtitle"
+                            android:ems="4"
+                            android:textColorHint="@color/black"
+                            android:textAlignment="textEnd"
+                            android:backgroundTint="@color/black"
+                            android:textColor="@color/black"
+                            android:hint="@string/kcal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_1" />
+
+                        <View
+                            android:id="@+id/modify_food_stats_sep_3"
+                            style="@style/material_card_thin_line"
+                            android:background="@color/red"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_calories" />
+
+                        <TextView
+                            style="@style/material_card_subtitle"
+                            android:text="@string/carbs"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_carbs"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_carbs" />
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_carbs"
+                            style="@style/material_card_edit_subtitle"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_3" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            style="@style/material_card_content"
+                            android:text="@string/fiber"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_fiber"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_fiber" />
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_fiber"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_carbs" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/sugars"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_sugar"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_sugar"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_sugar"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fiber" />
+
+                        <View
+                            android:id="@+id/modify_food_stats_sep_4"
+                            style="@style/material_card_thin_line"
+                            android:background="@color/red"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sugar" />
+
+                        <TextView
+                            style="@style/material_card_subtitle"
+                            android:text="@string/protein"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_protein"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_protein"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_protein"
+                            style="@style/material_card_edit_subtitle"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_4" />
+
+                        <View
+                            android:id="@+id/modify_food_stats_sep_5"
+                            style="@style/material_card_thin_line"
+                            android:background="@color/red"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_protein" />
+
+                        <TextView
+                            style="@style/material_card_subtitle"
+                            android:text="@string/fat"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_fat"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_fat"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_fat"
+                            style="@style/material_card_edit_subtitle"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_5" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/saturated_fat"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_fat_sat"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_fat_sat"/>
+
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_fat_sat"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/unsaturated_fat"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_fat_un_sat"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_fat_un_sat"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_fat_un_sat"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat_sat" />
+
+                        <View
+                            android:id="@+id/modify_food_stats_sep_6"
+                            style="@style/material_card_thin_line"
+                            android:background="@color/red"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat_un_sat" />
+
+                        <TextView
+                            android:id="@+id/modify_food_stats_other"
+                            style="@style/material_card_subtitle"
+                            android:text="@string/other"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_6" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/cholesterol"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_cholesterol"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_cholesterol"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_cholesterol"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_other" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/sodium"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_sodium"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_sodium"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_sodium"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_cholesterol" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/potassium"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_potassium"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_potassium"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_potassium"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sodium" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/iron"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_iron"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_iron"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_iron"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_potassium" />
+
+                        <TextView
+                            style="@style/material_card_content"
+                            android:text="@string/vitamin_d"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/modify_food_stats_vitamin_d"
+                            app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_vitamin_d"/>
+
+                        <EditText
+                            android:id="@+id/modify_food_stats_vitamin_d"
+                            style="@style/material_card_edit_content"
+                            android:hint="@string/g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_iron" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+
+
+                <Button
+                    android:id="@+id/modify_food_create_btn"
+                    style="@style/button_normal"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="@color/azure"
+                    android:text="@string/add"
+                    android:visibility="@{modifyFoodVM.isCreateVisible()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_card" />
+
+                <Button
+                    android:id="@+id/modify_food_update_btn"
+                    style="@style/button_normal"
+                    android:backgroundTint="@color/ao"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/update"
+                    android:visibility="@{modifyFoodVM.isEditVisible()}"
+                    app:layout_constraintEnd_toStartOf="@+id/modify_food_delete_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_card" />
+
+                <Button
+                    android:id="@+id/modify_food_delete_btn"
+                    style="@style/button_normal"
+                    android:backgroundTint="@color/red"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/delete"
+                    android:visibility="@{modifyFoodVM.isEditVisible()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/modify_food_update_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_card" />
+
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_card"/>
+
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
