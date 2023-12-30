@@ -62,4 +62,22 @@ object HelperFunctions {
         return calendarNew
     }
 
+    fun convertToString(float: Float?) : String
+    {
+        return if (float==0.0f) {
+            ""
+        } else {
+            float.toString()
+        }
+    }
+
+    fun convertToFloat(s:String) : Float
+    {
+        return if (s=="" || s==".") {
+            0.0f
+        } else {
+            s.toFloat()
+        }
+    }
+
 }

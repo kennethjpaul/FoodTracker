@@ -13,6 +13,7 @@ import com.kinetx.foodtracker.database.DatabaseRepository
 import com.kinetx.foodtracker.database.FoodDB
 import com.kinetx.foodtracker.enums.ServingUnit
 import com.kinetx.foodtracker.fragment.ModifyFoodFragmentArgs
+import com.kinetx.foodtracker.helpers.HelperFunctions
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -120,7 +121,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
         foodName.value = _foodDB.value?.foodName
         foodDesc.value = _foodDB.value?.foodDesc
 
-        foodServing.value = convertToString(_foodDB.value?.foodServingSize)
+        foodServing.value = HelperFunctions.convertToString(_foodDB.value?.foodServingSize)
         _foodUnitSpinnerSelected.value = when(_foodDB.value?.foodServingUnit)
         {
             ServingUnit.G->0
@@ -128,37 +129,19 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
             else -> 0
         }
 
-        foodCalories.value = convertToString(_foodDB.value?.foodCalories)
-        foodCarbs.value = convertToString(_foodDB.value?.foodCarbs)
-        foodFiber.value = convertToString(_foodDB.value?.foodFiber)
-        foodSugar.value = convertToString(_foodDB.value?.foodSugar)
-        foodProtein.value = convertToString(_foodDB.value?.foodProtein)
-        foodFat.value = convertToString(_foodDB.value?.foodFat)
-        foodFatSat.value = convertToString(_foodDB.value?.foodFatSat)
-        foodFatUnSat.value = convertToString(_foodDB.value?.foodFatUnSat)
-        foodCholesterol.value = convertToString(_foodDB.value?.foodCholesterol)
-        foodSodium.value = convertToString(_foodDB.value?.foodSodium)
-        foodPotassium.value = convertToString(_foodDB.value?.foodPotassium)
-        foodIron.value = convertToString(_foodDB.value?.foodIron)
-        foodVitaminD.value = convertToString(_foodDB.value?.foodVitaminD)
-    }
-
-    private fun convertToString(float: Float?) : String
-    {
-        return if (float==0.0f) {
-            ""
-        } else {
-            float.toString()
-        }
-    }
-
-    fun convertToFloat(s:String) : Float
-    {
-        return if (s=="" || s==".") {
-            0.0f
-        } else {
-            s.toFloat()
-        }
+        foodCalories.value = HelperFunctions.convertToString(_foodDB.value?.foodCalories)
+        foodCarbs.value = HelperFunctions.convertToString(_foodDB.value?.foodCarbs)
+        foodFiber.value = HelperFunctions.convertToString(_foodDB.value?.foodFiber)
+        foodSugar.value = HelperFunctions.convertToString(_foodDB.value?.foodSugar)
+        foodProtein.value = HelperFunctions.convertToString(_foodDB.value?.foodProtein)
+        foodFat.value = HelperFunctions.convertToString(_foodDB.value?.foodFat)
+        foodFatSat.value = HelperFunctions.convertToString(_foodDB.value?.foodFatSat)
+        foodFatUnSat.value = HelperFunctions.convertToString(_foodDB.value?.foodFatUnSat)
+        foodCholesterol.value = HelperFunctions.convertToString(_foodDB.value?.foodCholesterol)
+        foodSodium.value = HelperFunctions.convertToString(_foodDB.value?.foodSodium)
+        foodPotassium.value = HelperFunctions.convertToString(_foodDB.value?.foodPotassium)
+        foodIron.value = HelperFunctions.convertToString(_foodDB.value?.foodIron)
+        foodVitaminD.value = HelperFunctions.convertToString(_foodDB.value?.foodVitaminD)
     }
 
     fun createFood(selectedUnitPosition: Int) : Boolean {

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentModifyFoodBinding
+import com.kinetx.foodtracker.helpers.HelperFunctions
 import com.kinetx.foodtracker.viewmodel.ModifyFoodVM
 import com.kinetx.foodtracker.viewmodelfactory.ModifyFoodVMF
 
@@ -92,71 +93,71 @@ class ModifyFoodFragment : Fragment() {
 
         viewModel.foodServing.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodServingSize = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodServingSize = HelperFunctions.convertToFloat(it)
         }
         viewModel.foodCalories.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodCalories = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodCalories = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodCarbs.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodCarbs = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodCarbs = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodFiber.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodFiber = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodFiber = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodSugar.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodSugar = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodSugar = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodProtein.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodProtein = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodProtein = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodFat.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodFat = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodFat = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodFatSat.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodFatSat = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodFatSat = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodFatUnSat.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodFatUnSat = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodFatUnSat = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodCholesterol.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodCholesterol = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodCholesterol = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodSodium.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodSodium = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodSodium = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodPotassium.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodPotassium = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodPotassium = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodIron.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodIron = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodIron = HelperFunctions.convertToFloat(it)
         }
 
         viewModel.foodVitaminD.observe(viewLifecycleOwner)
         {
-            viewModel.foodDB.value?.foodVitaminD = viewModel.convertToFloat(it)
+            viewModel.foodDB.value?.foodVitaminD = HelperFunctions.convertToFloat(it)
         }
 
         /////
