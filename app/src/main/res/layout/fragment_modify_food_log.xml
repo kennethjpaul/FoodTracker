@@ -189,6 +189,7 @@
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toBottomOf="@+id/modify_food_log_details_card">
+
          <androidx.constraintlayout.widget.ConstraintLayout style="@style/material_card_constraint">
 
              <TextView
@@ -199,6 +200,7 @@
                  app:layout_constraintTop_toTopOf="parent" />
 
              <View
+                 android:id="@+id/modify_food_log_stats_sep_1"
                  android:layout_width="match_parent"
                  android:layout_height="3dp"
                  android:background="@color/red"
@@ -206,34 +208,84 @@
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_title" />
 
-             <View
-                 android:id="@+id/modify_food_log_stats_temp"
-                 android:layout_width="match_parent"
+             <com.kinetx.foodtracker.customview.CircularProgressBar
+                 android:id="@+id/modify_food_log_stats_percent_carbs"
+                 android:layout_width="100dp"
                  android:layout_height="100dp"
-                 android:layout_marginTop="16dp"
-                 android:background="@color/red"
-                 app:layout_constraintEnd_toEndOf="parent"
+                 android:layout_marginTop="32dp"
+                 app:layout_constraintEnd_toStartOf="@+id/modify_food_log_stats_percent_protein"
+                 app:layout_constraintHorizontal_bias="0.5"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_title" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_1"
+                 app:seekBarColor="@color/red"
+                 app:seekPercentage="50" />
+
+             <TextView
+                 style="@style/material_card_subtitle"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_percent_carbs"
+                 app:layout_constraintStart_toStartOf="@+id/modify_food_log_stats_percent_carbs"
+                 app:layout_constraintEnd_toEndOf="@+id/modify_food_log_stats_percent_carbs"
+                 android:text="@string/carbs"/>
+
+             <com.kinetx.foodtracker.customview.CircularProgressBar
+                 android:id="@+id/modify_food_log_stats_percent_protein"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
+                 android:layout_marginTop="32dp"
+                 app:layout_constraintEnd_toStartOf="@+id/modify_food_log_stats_percent_fat"
+                 app:layout_constraintHorizontal_bias="0.5"
+                 app:layout_constraintStart_toEndOf="@+id/modify_food_log_stats_percent_carbs"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_1"
+                 app:seekBarColor="@color/azure"
+                 app:seekPercentage="20" />
+
+             <TextView
+                 style="@style/material_card_subtitle"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_percent_protein"
+                 app:layout_constraintStart_toStartOf="@+id/modify_food_log_stats_percent_protein"
+                 app:layout_constraintEnd_toEndOf="@+id/modify_food_log_stats_percent_protein"
+                 android:text="@string/protein"/>
+
+             <com.kinetx.foodtracker.customview.CircularProgressBar
+                 android:id="@+id/modify_food_log_stats_percent_fat"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
+                 android:layout_marginTop="32dp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintHorizontal_bias="0.5"
+                 app:layout_constraintStart_toEndOf="@+id/modify_food_log_stats_percent_protein"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_1"
+                 app:seekBarColor="@color/ao"
+                 app:seekPercentage="30" />
+
+             <TextView
+                 style="@style/material_card_subtitle"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_percent_fat"
+                 app:layout_constraintStart_toStartOf="@+id/modify_food_log_stats_percent_fat"
+                 app:layout_constraintEnd_toEndOf="@+id/modify_food_log_stats_percent_fat"
+                 android:text="@string/fat"/>
+
              <View
                  android:id="@+id/modify_food_log_stats_sep_2"
+                 style="@style/material_card_thin_line"
+                 android:layout_marginTop="48dp"
                  android:background="@color/red"
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_temp"
-                 style="@style/material_card_thin_line" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_percent_protein" />
+
              <TextView
+                 style="@style/material_card_subtitle"
                  android:text="@string/calories"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_2"
-                 style="@style/material_card_subtitle" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_2" />
 
-            <TextView
-                android:id="@+id/modify_food_log_stats_calories"
-                style="@style/material_card_subtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_2"
-                android:text="@string/_9999kcal"/>
+             <TextView
+                 android:id="@+id/modify_food_log_stats_calories"
+                 style="@style/material_card_subtitle"
+                 android:text="@string/_9999kcal"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_2" />
 
              <View
                  android:id="@+id/modify_food_log_stats_sep_3"
@@ -242,39 +294,46 @@
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_calories" />
+
              <TextView
                  style="@style/material_card_subtitle"
                  android:text="@string/carbs"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_3"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_3" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_carbs"
                  style="@style/material_card_subtitle"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_3"/>
-            <TextView
-                android:text="@string/fiber"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_carbs"
-                style="@style/material_card_content" />
-            <TextView
-                android:id="@+id/modify_food_log_stats_fiber"
-                style="@style/material_card_content"
-                android:text="@string/_999_g"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_carbs"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_3" />
+
              <TextView
+                 style="@style/material_card_content"
+                 android:text="@string/fiber"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_carbs" />
+
+             <TextView
+                 android:id="@+id/modify_food_log_stats_fiber"
+                 style="@style/material_card_content"
+                 android:text="@string/_999_g"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_carbs" />
+
+             <TextView
+                 style="@style/material_card_content"
                  android:text="@string/sugars"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fiber"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fiber" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_sugar"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fiber"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fiber" />
+
              <View
                  android:id="@+id/modify_food_log_stats_sep_4"
                  style="@style/material_card_thin_line"
@@ -282,17 +341,20 @@
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sugar" />
+
              <TextView
                  style="@style/material_card_subtitle"
                  android:text="@string/protein"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_4"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_4" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_protein"
                  style="@style/material_card_subtitle"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_4"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_4" />
+
              <View
                  android:id="@+id/modify_food_log_stats_sep_5"
                  style="@style/material_card_thin_line"
@@ -300,39 +362,46 @@
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_protein" />
+
              <TextView
                  style="@style/material_card_subtitle"
                  android:text="@string/fat"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_5"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_5" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_fat"
                  style="@style/material_card_subtitle"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_5"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_5" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/saturated_fat"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_fat_sat"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/unsaturated_fat"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat_sat"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat_sat" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_fat_un_sat"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat_sat"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat_sat" />
+
              <View
                  android:id="@+id/modify_food_log_stats_sep_6"
                  style="@style/material_card_thin_line"
@@ -340,67 +409,78 @@
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_fat_un_sat" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_other"
                  style="@style/material_card_subtitle"
                  android:text="@string/other"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_6"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sep_6" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/cholesterol"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_other"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_other" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_cholesterol"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_other"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_other" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/sodium"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_cholesterol"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_cholesterol" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_sodium"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_cholesterol"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_cholesterol" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/potassium"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sodium"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sodium" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_potassium"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sodium"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_sodium" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/iron"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_potassium"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_potassium" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_iron"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_potassium"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_potassium" />
+
              <TextView
+                 style="@style/material_card_content"
                  android:text="@string/vitamin_d"
                  app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_iron"
-                 style="@style/material_card_content" />
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_iron" />
+
              <TextView
                  android:id="@+id/modify_food_log_stats_vitamin_d"
                  style="@style/material_card_content"
                  android:text="@string/_999_g"
                  app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_iron"/>
+                 app:layout_constraintTop_toBottomOf="@+id/modify_food_log_stats_iron" />
 
          </androidx.constraintlayout.widget.ConstraintLayout>
      </com.google.android.material.card.MaterialCardView>

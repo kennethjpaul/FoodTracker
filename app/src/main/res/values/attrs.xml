@@ -4,6 +4,10 @@
         <attr name="cardTitle" format="string"/>
         <attr name="cardColor" format="color"/>
     </declare-styleable>
+    <declare-styleable name="CircularProgressBar">
+        <attr name="seekPercentage" format="string"/>
+        <attr name="seekBarColor" format="color"/>
+    </declare-styleable>
     <declare-styleable name="CustomDateView">
         <attr name="date" format="integer"/>
         <attr name="day_c" format="string"/>
