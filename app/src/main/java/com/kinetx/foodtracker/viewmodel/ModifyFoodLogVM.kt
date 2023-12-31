@@ -3,7 +3,9 @@ package com.kinetx.foodtracker.viewmodel
 import android.app.Application
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,39 +15,35 @@ import com.kinetx.foodtracker.database.DatabaseRepository
 import com.kinetx.foodtracker.database.FoodDB
 import com.kinetx.foodtracker.database.FoodLogDB
 import com.kinetx.foodtracker.enums.FoodType
+import com.kinetx.foodtracker.enums.ServingUnit
 import com.kinetx.foodtracker.fragment.ModifyFoodLogFragmentArgs
 import com.kinetx.foodtracker.helpers.HelperFunctions
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.lang.Math.round
 import kotlin.math.roundToInt
 
 class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs): AndroidViewModel(application) {
 
-
+    var testBool : Boolean = true
 
     private val spinnerFoodTypeList = listOf("Breakfast","Lunch","Snacks","Dinner")
 
-    private val _foodTypeSpinnerSelected = MutableLiveData<Int>()
+    val foodTypeSpinnerSelectedM = MutableLiveData<Int>()
     val foodTypeSpinnerSelected : LiveData<Int>
-        get() = _foodTypeSpinnerSelected
+        get() = foodTypeSpinnerSelectedM
 
     private val _foodTypeSpinner = MutableLiveData<List<String>>()
     val foodTypeSpinner : LiveData<List<String>>
         get() = _foodTypeSpinner
 
 
-    private val spinnerUnitList = listOf("g","ml")
+    private val spinnerUnitList = listOf("g","ml","xx")
 
-    private val _foodUnitSpinnerSelected = MutableLiveData<Int>()
-    val foodUnitSpinnerSelected : LiveData<Int>
-        get() = _foodUnitSpinnerSelected
-
-    private val _foodUnitSpinner = MutableLiveData<List<String>>()
-    val foodUnitSpinner : LiveData<List<String>>
-        get() = _foodUnitSpinner
-
-
+    private val _selectedFoodUnit = MutableLiveData<String>()
+    val selectedFoodUnit : LiveData<String>
+        get() = _selectedFoodUnit
 
     private val _isEditVisible = MutableLiveData<Int>()
     val isEditVisible : LiveData<Int>
@@ -79,16 +77,24 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
 
     //
 
-    private val _foodLogDB = MutableLiveData<FoodLogDB>()
-    val foodLogDB : LiveData<FoodLogDB>
-        get() = _foodLogDB
+    private val _foodLogDBQuery = MutableLiveData<FoodLogDB>()
+    val foodLogDBQuery : LiveData<FoodLogDB>
+        get() = _foodLogDBQuery
+
+    private var _foodLog = FoodLogDB()
 
 
     /// Selected Food
-    private val _foodDb = MutableLiveData<FoodDB>()
-    val foodDb : LiveData<FoodDB>
-        get() = _foodDb
 
+    private val _foodDbQuery = MutableLiveData<FoodDB>()
+    val foodDbQuery : LiveData<FoodDB>
+        get() = _foodDbQuery
+
+    private val _foodDbQuery1 = MutableLiveData<FoodDB>()
+    val foodDbQuery1 : LiveData<FoodDB>
+        get() = _foodDbQuery1
+
+    private var _foodDb = FoodDB()
 
     private val _selectedFoodId = MutableLiveData<Long>()
     val selectedFoodId : LiveData<Long>
@@ -153,13 +159,11 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
 
         _foodTypeSpinner.value = spinnerFoodTypeList
-        _foodUnitSpinner.value = spinnerUnitList
-
         initializeValues()
 
 
 
-        _foodTypeSpinnerSelected.value = when(args.foodType)
+        foodTypeSpinnerSelectedM.value = when(args.foodType)
         {
             FoodType.BREAKFAST->0
             FoodType.LUNCH -> 1
@@ -179,13 +183,11 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
                 _isEditVisible.value = View.VISIBLE
                 viewModelScope.launch(Dispatchers.IO)
                 {
-                    _foodLogDB.postValue(repository.getFoodLogWithId(args.foodLogId))
+                    _foodLogDBQuery.postValue(repository.getFoodLogWithId(args.foodLogId))
                 }
             }
         }
 
-
-        _foodUnitSpinnerSelected.value = 0
     }
 
     private fun initializeValues() {
@@ -193,7 +195,6 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         _carbPercent.value="0.0"
         _proteinPercent.value="0.0"
         _fatPercent.value="0.0"
-        _foodLogDB.value = FoodLogDB()
         _selectedFoodId.value = -1L
         _selectedFoodName.value = ""
         _selectedFoodDesc.value = ""
@@ -210,6 +211,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         foodPotassium.value = "0.0 g"
         foodIron.value = "0.0 g"
         foodVitaminD.value = "0.0 g"
+        _selectedFoodUnit.value = spinnerUnitList[0]
 
     }
 
@@ -245,51 +247,154 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     }
 
     fun updateSelectedFood(foodId: Long, foodName: String, foodDesc: String) {
-        _selectedFoodId.value = foodId
-        _selectedFoodName.value = foodName
-        _selectedFoodDesc.value = foodDesc
-
         viewModelScope.launch(Dispatchers.IO)
         {
-            val tmp = repository.getFoodWithId(foodId)
-            _foodDb.postValue(tmp)
+            Log.i("III","updateSelectedFood with food id ${foodId}")
+            _foodDbQuery1.postValue(repository.getFoodWithId1(foodId))
         }
     }
 
     fun updateInterface() {
+        if (_foodDb.foodId!=-1L) {
+            Log.i("III", "Update interface was called")
+            val c = _foodDb.foodCarbs
+            val p = _foodDb.foodProtein
+            val f = _foodDb.foodFat
+            //TODO
+            if (c + p + f == 0f) {
+                _carbPercent.value = "0"
+                _proteinPercent.value = "0"
+                _fatPercent.value = "0"
+            } else {
+                _carbPercent.value = (c / (c + p + f) * 100).toString()
+                _proteinPercent.value = (p / (c + p + f) * 100).toString()
+                _fatPercent.value = (f / (c + p + f) * 100).toString()
+            }
 
-        val c = _foodDb.value?.foodCarbs
-        val p = _foodDb.value?.foodProtein
-        val f = _foodDb.value?.foodFat
+            _selectedFoodUnit.value = when (_foodDb.foodServingUnit) {
+                ServingUnit.G -> spinnerUnitList[0]
+                ServingUnit.ML -> spinnerUnitList[1]
+            }
 
-        if (c != null && p!=null && f!=null) {
-            _carbPercent.value = (c/(c+p+f)*100).toString()
-            _proteinPercent.value = (p/(c+p+f)*100).toString()
-            _fatPercent.value = (f/(c+p+f)*100).toString()
+            val m = HelperFunctions.convertToFloat(foodQuantity.value!!)
+            val n = _foodDb.foodServingSize
+            var scale = m.div(n)
+            if (n == 0f) {
+                scale = 0f
+            }
+
+            foodCalories.value = (scale * _foodDb.foodCalories).roundToInt().toString() + " Kcal"
+            foodCarbs.value = (scale * _foodDb.foodCarbs).roundToInt().toString() + " g"
+            foodFiber.value = (scale * _foodDb.foodFiber).roundToInt().toString() + " g"
+            foodSugar.value = (scale * _foodDb.foodSugar).roundToInt().toString() + " g"
+            foodProtein.value = (scale * _foodDb.foodProtein).roundToInt().toString() + " g"
+            foodFat.value = (scale * _foodDb.foodFat).roundToInt().toString() + " g"
+            foodFatSat.value = (scale * _foodDb.foodFatSat).roundToInt().toString() + " g"
+            foodFatUnSat.value = (scale * _foodDb.foodFatUnSat).roundToInt().toString() + " g"
+            foodCholesterol.value = (scale * _foodDb.foodCholesterol).roundToInt().toString() + " g"
+            foodSodium.value = (scale * _foodDb.foodSodium).roundToInt().toString() + " g"
+            foodPotassium.value = (scale * _foodDb.foodPotassium).roundToInt().toString() + " g"
+            foodIron.value = (scale * _foodDb.foodIron).roundToInt().toString() + " g"
+            foodVitaminD.value = (scale * _foodDb.foodVitaminD).roundToInt().toString() + " g"
+        }
+    }
+
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun createFoodLog(selectedFoodType: Int): Boolean {
+        
+        val foodType = when(selectedFoodType)
+        {
+            0 -> FoodType.BREAKFAST
+            1 -> FoodType.LUNCH
+            2 -> FoodType.SNACKS
+            3 -> FoodType.DINNER
+            else-> FoodType.BREAKFAST
+        }
+        val tmp = FoodLogDB(0,_selectedFoodId.value!!,foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!))
+
+
+        if(checkFoodLog(tmp))
+        {
+            GlobalScope.launch(Dispatchers.IO)
+            {
+                repository.insertFoodLog(tmp)
+            }
+            return true
         }
 
-        updateFoodNutrition()
-
+        return false
     }
 
-    fun updateFoodNutrition()
-    {
-        val m = HelperFunctions.convertToFloat(foodQuantity.value!!)
-        val n = _foodDb.value?.foodServingSize
-        val scale = m.div(n!!)
-
-        foodCalories.value = (scale * _foodDb.value?.foodCalories!!).roundToInt().toString()+" Kcal"
-        foodCarbs.value = (scale* _foodDb.value?.foodCarbs!!).roundToInt().toString()+" g"
-        foodFiber.value = (scale* _foodDb.value?.foodFiber!!).roundToInt().toString()+" g"
-        foodSugar.value = (scale* _foodDb.value?.foodSugar!!).roundToInt().toString()+" g"
-        foodProtein.value = (scale* _foodDb.value?.foodProtein!!).roundToInt().toString()+" g"
-        foodFat.value = (scale* _foodDb.value?.foodFat!!).roundToInt().toString()+" g"
-        foodFatSat.value = (scale* _foodDb.value?.foodFatSat!!).roundToInt().toString()+" g"
-        foodFatUnSat.value = (scale* _foodDb.value?.foodFatUnSat!!).roundToInt().toString()+" g"
-        foodCholesterol.value = (scale* _foodDb.value?.foodCholesterol!!).roundToInt().toString()+" g"
-        foodSodium.value = (scale* _foodDb.value?.foodSodium!!).roundToInt().toString()+" g"
-        foodPotassium.value = (scale* _foodDb.value?.foodPotassium!!).roundToInt().toString()+" g"
-        foodIron.value = (scale* _foodDb.value?.foodIron!!).roundToInt().toString()+" g"
-        foodVitaminD.value = (scale* _foodDb.value?.foodVitaminD!!).roundToInt().toString()+" g"
+    @OptIn(DelicateCoroutinesApi::class)
+    fun updateFoodLog(selectedFoodType: Int): Boolean {
+        val foodType = when(selectedFoodType)
+        {
+            0 -> FoodType.BREAKFAST
+            1 -> FoodType.LUNCH
+            2 -> FoodType.SNACKS
+            3 -> FoodType.DINNER
+            else-> FoodType.BREAKFAST
+        }
+        val tmp = FoodLogDB(_foodLog.foodLogId,_selectedFoodId.value!!,foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!))
+        if(checkFoodLog(tmp))
+        {
+            GlobalScope.launch(Dispatchers.IO)
+            {
+                repository.updateFoodLog(tmp)
+            }
+            return true
+        }
+        return false
     }
+
+    private fun checkFoodLog(foodLog: FoodLogDB): Boolean {
+
+        val context = getApplication<Application>().applicationContext
+
+        if (foodLog.foodId==-1L)
+        {
+            Toast.makeText(context,"Select a food", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (foodLog.foodQuantity==0f)
+        {
+            Toast.makeText(context,"Enter a serving size", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+    }
+
+    fun updateFoodDB(it: FoodDB) {
+        Log.i("III","updateFoodDB was called food id ${it.foodId}")
+        _foodDb = it
+        _foodLog.foodId = it.foodId
+        _selectedFoodId.value = it.foodId
+        _selectedFoodName.value = it.foodName
+        _selectedFoodDesc.value = it.foodDesc
+        updateInterface()
+    }
+
+    fun updateFoodLogDB(it: FoodLogDB) {
+        testBool= false
+        _foodLog = it
+        foodQuantity.value = HelperFunctions.convertToString(it.foodQuantity)
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            Log.i("III","updateFoodLogDB with food id ${it.foodId}")
+            _foodDbQuery.postValue(repository.getFoodWithId(it.foodId))
+        }
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun deleteFoodLog() {
+        val tmp = FoodLogDB(_foodLog.foodLogId,_selectedFoodId.value!!,_foodLog.foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!))
+        GlobalScope.launch(Dispatchers.IO)
+        {
+            repository.deleteFoodLog(tmp)
+        }
+    }
+
+
 }

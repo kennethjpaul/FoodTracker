@@ -16,7 +16,7 @@ interface DatabaseDao {
     @Query("SELECT * FROM food")
     fun getAllFood(): LiveData<List<FoodDB>>
     @Query("SELECT * FROM food WHERE foodId=:foodId")
-    suspend fun getFoodWithId(foodId: Long) : FoodDB
+    suspend fun getFoodWithId(foodId: Long) : FoodDB?
 
 
 
@@ -32,7 +32,7 @@ interface DatabaseDao {
     @Query("SELECT * FROM food_log WHERE foodLogId=:foodLogId")
     suspend fun getFoodLogWithId(foodLogId: Long) : FoodLogDB
     @Query("SELECT * FROM food_log WHERE food_date=:foodDate")
-    fun getAllFoodLogWithDate(foodDate:Long) : LiveData<List<FoodLogDB>>
+    suspend fun getAllFoodLogWithDate(foodDate:Long) : List<FoodLogDB>
     @Query("DELETE FROM food_log WHERE food_id=:foodId")
     suspend fun deleteFoodLogWithFood(foodId: Long)
 

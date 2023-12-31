@@ -1,17 +1,20 @@
 package com.kinetx.foodtracker.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentModifyFoodLogBinding
+import com.kinetx.foodtracker.helpers.HelperFunctions
 import com.kinetx.foodtracker.viewmodel.ModifyFoodLogVM
 import com.kinetx.foodtracker.viewmodelfactory.ModifyFoodLogVMF
 
@@ -58,27 +61,92 @@ class ModifyFoodLogFragment : Fragment() {
             viewModel.changeDate(-1)
         }
 
-
-        viewModel.foodDb.observe(viewLifecycleOwner)
+        binding.modifyFoodLogCreateBtn.setOnClickListener()
         {
-            viewModel.updateInterface()
+            val selectedFoodType = binding.modifyFoodLogSpinner.selectedItemPosition
+            if(viewModel.createFoodLog(selectedFoodType))
+            {
+                view?.findNavController()?.navigateUp()
+            }
         }
 
-        viewModel.foodQuantity.observe(viewLifecycleOwner)
+        binding.modifyFoodLogUpdateBtn.setOnClickListener()
         {
-            if(viewModel.foodDb.value?.foodId!=null)
+            val selectedFoodType = binding.modifyFoodLogSpinner.selectedItemPosition
+            if (viewModel.updateFoodLog(selectedFoodType))
             {
-                viewModel.updateFoodNutrition()
+                view?.findNavController()?.navigateUp()
+            }
+        }
+
+        binding.modifyFoodLogDeleteBtn.setOnClickListener()
+        {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setPositiveButton("Yes")
+            {
+                    _,_ ->
+                viewModel.deleteFoodLog()
+                view?.findNavController()?.navigateUp()
+            }
+            builder.setNegativeButton("No")
+            {
+                    _,_ ->
+            }
+            builder.setTitle("Do you want to delete this food log?")
+            builder.setMessage("This action is permanent")
+            builder.create().show()
+        }
+
+        binding.modifyFoodLogSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel.foodTypeSpinnerSelectedM.value = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.i("III P","Nothing")
             }
 
         }
 
 
+        viewModel.foodDbQuery.observe(viewLifecycleOwner)
+        {
+            if(it!=null)
+            {
+                Log.i("III","${it.foodId},${it.foodName},${it.foodDesc}")
+                viewModel.updateFoodDB(it)
 
+            }
+        }
 
+        viewModel.foodDbQuery1.observe(viewLifecycleOwner)
+        {
+            if(it!=null)
+            {
+                Log.i("III","New ${it.foodId},${it.foodName},${it.foodDesc}")
+                viewModel.updateFoodDB(it)
 
+            }
+        }
 
+        viewModel.foodQuantity.observe(viewLifecycleOwner)
+        {
+            Log.i("III","Update interface called from foodQQuantity")
+            viewModel.updateInterface()
+        }
 
+        viewModel.foodLogDBQuery.observe(viewLifecycleOwner)
+        {
+            Log.i("III","foodLogDBQuery Fragment")
+            if (viewModel.testBool) {
+                viewModel.updateFoodLogDB(it)
+            }
+        }
 
 
 

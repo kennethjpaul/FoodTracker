@@ -1,6 +1,7 @@
 package com.kinetx.foodtracker.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,30 +39,51 @@ class DailyFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
         binding.dailyFoodVM = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-
-        val breakfastM : ArrayList<FoodLogItemData> = ArrayList()
-        val lunchM : ArrayList<FoodLogItemData> = ArrayList()
-        val snacksM : ArrayList<FoodLogItemData> = ArrayList()
-        val dinnerM : ArrayList<FoodLogItemData> = ArrayList()
-
-
-        val foodCard : ArrayList<FoodCardItemData> = ArrayList()
-
-        foodCard.add(FoodCardItemData(FoodType.BREAKFAST,200F,breakfastM))
-        foodCard.add(FoodCardItemData(FoodType.LUNCH,100F,lunchM))
-        foodCard.add(FoodCardItemData(FoodType.SNACKS,2000F,snacksM))
-        foodCard.add(FoodCardItemData(FoodType.DINNER,20F,dinnerM))
-
         val adapter = FoodCardItemR(this)
 
         binding.foodLogRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.foodLogRecyclerview.setHasFixedSize(true)
         binding.foodLogRecyclerview.adapter = adapter
 
+        binding.dailyFoodLogDate.setOnClickListener()
+        {
+            viewModel.datePick(it)
+        }
 
-        adapter.setData(foodCard)
+        binding.dailyFoodLogIncreaseDate.setOnClickListener()
+        {
+            viewModel.changeDate(1)
+        }
+        binding.dailyFoodLogDecreaseDate.setOnClickListener()
+        {
+            viewModel.changeDate(-1)
+        }
+
+
+
+        viewModel.foodLogList.observe(viewLifecycleOwner)
+        {
+            val foodTypes = enumValues<FoodType>()
+
+            val foodCard = ArrayList<FoodCardItemData>()
+
+            for (type in foodTypes) {
+                val filteredItems = it.filter { it.foodType == type }
+                val itemList = filteredItems.ifEmpty {
+                    listOf(FoodCardItemData(type, 0F, ArrayList()))
+                }
+                foodCard.addAll(itemList)
+            }
+
+            adapter.setData(foodCard)
+        }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFoodLog()
     }
 
     override fun foodCardNavigate(foodId: Long, foodType: FoodType) {

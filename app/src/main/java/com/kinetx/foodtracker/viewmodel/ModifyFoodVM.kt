@@ -108,40 +108,37 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
                 Log.i("III food id 2",args.foodId.toString())
                 viewModelScope.launch(Dispatchers.IO)
                 {
-                    val tt = repository.getFoodWithId(args.foodId)
-                    _foodDB.postValue(tt)
+                    _foodDB.postValue(repository.getFoodWithId(args.foodId))
                 }
             }
         }
-
     }
 
-    fun updateInterface() {
+    fun updateInterface(it:FoodDB) {
 
-        foodName.value = _foodDB.value?.foodName
-        foodDesc.value = _foodDB.value?.foodDesc
+        foodName.value = it.foodName
+        foodDesc.value = it.foodDesc
 
-        foodServing.value = HelperFunctions.convertToString(_foodDB.value?.foodServingSize)
-        _foodUnitSpinnerSelected.value = when(_foodDB.value?.foodServingUnit)
+        foodServing.value = HelperFunctions.convertToString(it.foodServingSize)
+        _foodUnitSpinnerSelected.value = when(it.foodServingUnit)
         {
             ServingUnit.G->0
             ServingUnit.ML->1
-            else -> 0
         }
 
-        foodCalories.value = HelperFunctions.convertToString(_foodDB.value?.foodCalories)
-        foodCarbs.value = HelperFunctions.convertToString(_foodDB.value?.foodCarbs)
-        foodFiber.value = HelperFunctions.convertToString(_foodDB.value?.foodFiber)
-        foodSugar.value = HelperFunctions.convertToString(_foodDB.value?.foodSugar)
-        foodProtein.value = HelperFunctions.convertToString(_foodDB.value?.foodProtein)
-        foodFat.value = HelperFunctions.convertToString(_foodDB.value?.foodFat)
-        foodFatSat.value = HelperFunctions.convertToString(_foodDB.value?.foodFatSat)
-        foodFatUnSat.value = HelperFunctions.convertToString(_foodDB.value?.foodFatUnSat)
-        foodCholesterol.value = HelperFunctions.convertToString(_foodDB.value?.foodCholesterol)
-        foodSodium.value = HelperFunctions.convertToString(_foodDB.value?.foodSodium)
-        foodPotassium.value = HelperFunctions.convertToString(_foodDB.value?.foodPotassium)
-        foodIron.value = HelperFunctions.convertToString(_foodDB.value?.foodIron)
-        foodVitaminD.value = HelperFunctions.convertToString(_foodDB.value?.foodVitaminD)
+        foodCalories.value = HelperFunctions.convertToString(it.foodCalories)
+        foodCarbs.value = HelperFunctions.convertToString(it.foodCarbs)
+        foodFiber.value = HelperFunctions.convertToString(it.foodFiber)
+        foodSugar.value = HelperFunctions.convertToString(it.foodSugar)
+        foodProtein.value = HelperFunctions.convertToString(it.foodProtein)
+        foodFat.value = HelperFunctions.convertToString(it.foodFat)
+        foodFatSat.value = HelperFunctions.convertToString(it.foodFatSat)
+        foodFatUnSat.value = HelperFunctions.convertToString(it.foodFatUnSat)
+        foodCholesterol.value = HelperFunctions.convertToString(it.foodCholesterol)
+        foodSodium.value = HelperFunctions.convertToString(it.foodSodium)
+        foodPotassium.value = HelperFunctions.convertToString(it.foodPotassium)
+        foodIron.value = HelperFunctions.convertToString(it.foodIron)
+        foodVitaminD.value = HelperFunctions.convertToString(it.foodVitaminD)
     }
 
     fun createFood(selectedUnitPosition: Int) : Boolean {

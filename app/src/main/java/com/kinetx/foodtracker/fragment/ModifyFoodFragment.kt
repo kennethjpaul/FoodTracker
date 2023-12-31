@@ -169,7 +169,7 @@ class ModifyFoodFragment : Fragment() {
 
         viewModel.foodDB.observe(viewLifecycleOwner)
         {
-            viewModel.updateInterface()
+            viewModel.updateInterface(it)
         }
 
 

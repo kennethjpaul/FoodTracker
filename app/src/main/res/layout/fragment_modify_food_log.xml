@@ -169,18 +169,17 @@
                  android:ems="5"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/modify_food_log_details_title" />
-
-             <Spinner
-                 android:id="@+id/modify_food_log_details_unit"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginStart="8dp"
-                 android:theme="@style/ThemeOverlay.Material3.Light"
-                 android:entries="@{modifyFoodLogVM.foodUnitSpinner}"
-                 android:selectedItemPosition="@{modifyFoodLogVM.foodUnitSpinnerSelected}"
-                 app:layout_constraintBottom_toBottomOf="@+id/modify_food_log_details_value"
-                 app:layout_constraintStart_toEndOf="@+id/modify_food_log_details_value"
-                 app:layout_constraintTop_toTopOf="@+id/modify_food_log_details_value" />
+            <TextView
+                android:id="@+id/modify_food_log_details_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:clickable="false"
+                android:theme="@style/ThemeOverlay.Material3.Light"
+                android:text="@{modifyFoodLogVM.selectedFoodUnit}"
+                app:layout_constraintBottom_toBottomOf="@+id/modify_food_log_details_value"
+                app:layout_constraintStart_toEndOf="@+id/modify_food_log_details_value"
+                app:layout_constraintTop_toTopOf="@+id/modify_food_log_details_value"/>
 
          </androidx.constraintlayout.widget.ConstraintLayout>
 
