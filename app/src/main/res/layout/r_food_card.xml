@@ -7,10 +7,7 @@
     android:layout_marginBottom="16dp">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        style="@style/CardView"
-        app:cardBackgroundColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/material_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,11 +38,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/food_card_add_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/black"
                 android:src="@drawable/ic_baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="@+id/food_card_rectangle"
                 app:layout_constraintEnd_toEndOf="parent"

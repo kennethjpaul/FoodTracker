@@ -1,9 +1,11 @@
 package com.kinetx.foodtracker.recyclerview
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.ui.NavigationUI
@@ -21,7 +23,7 @@ class FoodCardItemR(val listener : FoodCardNavigate): RecyclerView.Adapter<FoodC
         val cardTitle : TextView = itemView.findViewById(R.id.food_card_title)
         val cardTotal : TextView = itemView.findViewById(R.id.food_card_total_value)
         val cardRecyclerView : RecyclerView = itemView.findViewById(R.id.food_card_recyclerview)
-        val cardAddIcon: ImageView = itemView.findViewById(R.id.food_card_add_icon)
+        val cardAddIcon: ImageButton = itemView.findViewById(R.id.food_card_add_icon)
         val cardColor : View = itemView.findViewById(R.id.food_card_rectangle)
 
         init {
@@ -50,6 +52,7 @@ class FoodCardItemR(val listener : FoodCardNavigate): RecyclerView.Adapter<FoodC
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FoodCardItemR.MyViewHolder, position: Int) {
         val currentItem = _list[position]
         val adapter = FoodLogItemR(this)

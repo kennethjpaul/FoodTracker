@@ -75,6 +75,16 @@ class DailyFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
                 foodCard.addAll(itemList)
             }
 
+            val totalConsumption = foodCard.map {
+                it.foodCardTotal
+            }.sum()
+
+            val totalGoal = 3000f
+
+            val totalRemaining = (totalConsumption/totalGoal)*100
+
+            viewModel._remainingCalorie.value = totalRemaining.toString()
+
             adapter.setData(foodCard)
         }
 

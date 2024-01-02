@@ -20,6 +20,13 @@ import kotlinx.coroutines.launch
 
 class DailyFoodVM(application: Application): AndroidViewModel(application) {
 
+
+    val _remainingCalorie = MutableLiveData<String>()
+    val remainingCalorie : LiveData<String>
+        get() = _remainingCalorie
+
+
+
     private val _selectedDay = MutableLiveData<String>()
     val selectedDay : LiveData<String>
         get() = _selectedDay
@@ -50,6 +57,7 @@ class DailyFoodVM(application: Application): AndroidViewModel(application) {
         val userDao = DatabaseMain.getInstance(application).databaseDao
         repository = DatabaseRepository(userDao)
 
+        _remainingCalorie.value = "78"
         _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()
         _selectedYear.value = myCalendar.get(Calendar.YEAR).toString()
