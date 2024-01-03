@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
             R.id.listFoodFragment,
             R.id.listExerciseFragment,
             R.id.statsDailyFragment,
-            R.id.statsMonthlyFragment)
+            R.id.statsMonthlyFragment,
+            R.id.goalsFragment)
 
         appBarConfiguration = AppBarConfiguration(topLevelFragments,drawerLayout)
         setupActionBarWithNavController(navController,appBarConfiguration)

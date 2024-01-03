@@ -51,7 +51,14 @@
         </menu>
 
     </item>
-
+    <item android:title="@string/details">
+        <menu>
+            <item
+                android:id="@+id/goalsFragment"
+                android:icon="@drawable/goals"
+                android:title="@string/goals" />
+        </menu>
+    </item>
     <item android:title="">
         <menu>
             <item

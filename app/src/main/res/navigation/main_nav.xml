@@ -77,4 +77,8 @@
             android:id="@+id/action_selectFoodFragment_to_modifyFoodFragment"
             app:destination="@id/modifyFoodFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/goalsFragment"
+        android:name="com.kinetx.foodtracker.fragment.GoalsFragment"
+        android:label="GoalsFragment" />
 </navigation>
