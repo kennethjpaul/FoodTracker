@@ -116,5 +116,9 @@ class DailyFoodVM(application: Application): AndroidViewModel(application) {
         getFoodLog()
     }
 
+    fun getCalendarDate(): Long {
+        return HelperFunctions.resetToMidnight(myCalendar).timeInMillis
+    }
+
 
 }

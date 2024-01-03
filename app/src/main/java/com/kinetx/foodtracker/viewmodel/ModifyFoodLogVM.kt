@@ -153,6 +153,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         val userDao = DatabaseMain.getInstance(application).databaseDao
         repository = DatabaseRepository(userDao)
 
+        myCalendar.timeInMillis = args.foodDate
 
          _selectedDay.value = myCalendar.get(Calendar.DAY_OF_MONTH).toString()
         _selectedMonth.value = myCalendar.get(Calendar.MONTH).toString()

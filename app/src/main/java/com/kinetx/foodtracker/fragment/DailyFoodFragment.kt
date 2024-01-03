@@ -97,7 +97,10 @@ class DailyFoodFragment : Fragment(), FoodCardItemR.FoodCardNavigate {
     }
 
     override fun foodCardNavigate(foodId: Long, foodType: FoodType) {
-        view?.findNavController()?.navigate(DailyFoodFragmentDirections.actionLogFoodFragmentToModifyFoodLogFragment(foodId,foodType))
+
+        val foodDate = viewModel.getCalendarDate()
+        
+        view?.findNavController()?.navigate(DailyFoodFragmentDirections.actionLogFoodFragmentToModifyFoodLogFragment(foodId,foodType,foodDate))
     }
 
 }

@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_modifyFoodLogFragment_to_selectFoodFragment"
             app:destination="@id/selectFoodFragment" />
+        <argument
+            android:name="foodDate"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/modifyFoodFragment"
