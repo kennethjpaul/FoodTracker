@@ -63,7 +63,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
 
 
 
-    private val spinnerUnitList = listOf("g","ml")
+    private val spinnerUnitList = listOf("g","ml","nos")
 
     private val _foodUnitSpinnerSelected = MutableLiveData<Int>()
     val foodUnitSpinnerSelected : LiveData<Int>
@@ -124,6 +124,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
         {
             ServingUnit.G->0
             ServingUnit.ML->1
+            ServingUnit.NOS->2
         }
 
         foodCalories.value = HelperFunctions.convertToString(it.foodCalories)
@@ -148,6 +149,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
         {
             0 -> ServingUnit.G
             1 -> ServingUnit.ML
+            2 -> ServingUnit.NOS
             else-> ServingUnit.G
         }
 
@@ -171,6 +173,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
         {
             0 -> ServingUnit.G
             1 -> ServingUnit.ML
+            2 -> ServingUnit.NOS
             else-> ServingUnit.G
         }
 

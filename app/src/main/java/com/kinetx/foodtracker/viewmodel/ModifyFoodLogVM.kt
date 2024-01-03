@@ -39,7 +39,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         get() = _foodTypeSpinner
 
 
-    private val spinnerUnitList = listOf("g","ml","xx")
+    private val spinnerUnitList = listOf("g","ml","nos")
 
     private val _selectedFoodUnit = MutableLiveData<String>()
     val selectedFoodUnit : LiveData<String>
@@ -275,6 +275,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             _selectedFoodUnit.value = when (_foodDb.foodServingUnit) {
                 ServingUnit.G -> spinnerUnitList[0]
                 ServingUnit.ML -> spinnerUnitList[1]
+                ServingUnit.NOS->spinnerUnitList[2]
             }
 
             val m = HelperFunctions.convertToFloat(foodQuantity.value!!)
