@@ -6,14 +6,15 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.toColorInt
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import com.kinetx.foodtracker.R
 import kotlin.math.round
+
 
 class CircularProgressBar@JvmOverloads constructor(
     context: Context,
@@ -42,10 +43,47 @@ class CircularProgressBar@JvmOverloads constructor(
     }
 
     init {
+
         context.withStyledAttributes(attrs, R.styleable.CircularProgressBar)
         {
-            paintOuter.color = getString(R.styleable.CircularProgressBar_seekBarColor).toString().toColorInt()
-//            percentage = getString(R.styleable.CircularProgressBar_seekPercentage).toString().toFloat()
+            try
+            {
+                paintInner.color = getString(R.styleable.CircularProgressBar_innerCircleColor).toString().toColorInt()
+            }
+            catch (e: IllegalArgumentException)
+            {
+                val value = TypedValue()
+                context.theme.resolveAttribute(android.R.attr.colorBackground,value,true)
+                paintInner.color = value.data
+            }
+            try
+            {
+                paintOuter.color = getString(R.styleable.CircularProgressBar_seekBarColor).toString().toColorInt()
+            }
+            catch (e:IllegalArgumentException)
+            {
+                paintOuter.color = Color.GREEN
+            }
+            try
+            {
+                paintText.color = getString(R.styleable.CircularProgressBar_seekBarTextColor).toString().toColorInt()
+            }
+            catch (e:IllegalArgumentException)
+            {
+                val value = TypedValue()
+                context.theme.resolveAttribute(android.R.attr.colorForeground,value,true)
+                paintText.color = value.data
+            }
+
+
+
+            percentage = try {
+                getString(R.styleable.CircularProgressBar_seekPercentage).toString().toFloat()
+            } catch (e:IllegalArgumentException) {
+                0f
+            }
+
+
         }
 
     }

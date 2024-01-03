@@ -7,6 +7,12 @@
     <declare-styleable name="CircularProgressBar">
         <attr name="seekPercentage" format="string"/>
         <attr name="seekBarColor" format="color"/>
+        <attr name="innerCircleColor" format="color"/>
+        <attr name="seekBarTextColor" format="color"/>
+        <attr name="seekBarType">
+            <enum name="percentage" value="0"/>
+            <enum name="kcal" value="1"/>
+        </attr>
     </declare-styleable>
     <declare-styleable name="CustomDateView">
         <attr name="date" format="integer"/>
