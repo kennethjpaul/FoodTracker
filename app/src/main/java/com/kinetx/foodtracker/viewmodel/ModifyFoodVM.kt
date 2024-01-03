@@ -224,22 +224,6 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
             Toast.makeText(context,"Calories value cannot be empty",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (foodDB?.foodCarbs==0.0f)
-        {
-            Toast.makeText(context,"Carbs value cannot be empty",Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if (foodDB?.foodProtein==0.0f)
-        {
-            Toast.makeText(context,"Protein value cannot be empty",Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if (foodDB?.foodFat==0.0f)
-        {
-            Toast.makeText(context,"Fat value cannot be empty",Toast.LENGTH_SHORT).show()
-            return false
-        }
-
 
         return true
     }
