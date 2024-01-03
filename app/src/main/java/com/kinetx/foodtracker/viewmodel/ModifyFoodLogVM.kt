@@ -311,7 +311,9 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             3 -> FoodType.DINNER
             else-> FoodType.BREAKFAST
         }
-        val tmp = FoodLogDB(0,_selectedFoodId.value!!,foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!))
+
+        val foodC = foodCalories.value!!.replace(" Kcal","")
+        val tmp = FoodLogDB(0,_selectedFoodId.value!!,foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!),HelperFunctions.convertToFloat(foodC))
 
 
         if(checkFoodLog(tmp))
@@ -336,7 +338,8 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
             3 -> FoodType.DINNER
             else-> FoodType.BREAKFAST
         }
-        val tmp = FoodLogDB(_foodLog.foodLogId,_selectedFoodId.value!!,foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!))
+        val foodC = foodCalories.value!!.replace(" Kcal","")
+        val tmp = FoodLogDB(_foodLog.foodLogId,_selectedFoodId.value!!,foodType,HelperFunctions.resetToMidnight(myCalendar).timeInMillis,HelperFunctions.convertToFloat(foodQuantity.value!!),HelperFunctions.convertToFloat(foodC))
         if(checkFoodLog(tmp))
         {
             GlobalScope.launch(Dispatchers.IO)

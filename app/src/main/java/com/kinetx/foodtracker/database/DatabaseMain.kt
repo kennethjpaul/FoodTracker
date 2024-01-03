@@ -4,13 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [FoodLogDB::class, FoodDB::class], version = 1, exportSchema = false)
+@Database(entities = [FoodLogDB::class, FoodDB::class], version = 2, exportSchema = false)
 abstract class DatabaseMain : RoomDatabase(){
     abstract val databaseDao : DatabaseDao
 
     companion object
     {
+
+        val MIGRATION_1_2 = object : Migration(1,2)
+        {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE food_log ADD COLUMN food_calorie FLOAT NOT NULL DEFAULT 0.0")
+            }
+        }
 
         @Volatile
         private var INSTANCE : DatabaseMain? = null
@@ -28,7 +37,7 @@ abstract class DatabaseMain : RoomDatabase(){
                         DatabaseMain::class.java,
                         "main_database"
                     )
-                        .fallbackToDestructiveMigration()
+                        .addMigrations(MIGRATION_1_2)
                         .build()
 
                     INSTANCE = instance

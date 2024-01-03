@@ -20,5 +20,8 @@ data class FoodLogDB(
     var foodDate : Long = -1L,
 
     @ColumnInfo(name = "food_quantity")
-    var foodQuantity : Float = 0.0f
+    var foodQuantity : Float = 0.0f,
+
+    @ColumnInfo(name = "food_calorie")
+    var foodCalorie : Float = 0.0f
 )

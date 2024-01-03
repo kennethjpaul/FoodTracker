@@ -74,10 +74,10 @@ class DailyFoodVM(application: Application): AndroidViewModel(application) {
                 it.foodType
             }.map {
                 val a1 = it.key
-                val a2 = it.value.map { it.foodQuantity }.sum()
+                val a2 = it.value.map { it.foodCalorie }.sum()
                 val a3 = it.value.map {
                     val k = repository.getFoodWithId(it.foodId)
-                    FoodLogItemData(it.foodLogId,it.foodId,k!!.foodName,it.foodQuantity)
+                    FoodLogItemData(it.foodLogId,it.foodId,k!!.foodName,it.foodCalorie)
                 }
                 FoodCardItemData(a1,a2,a3)
             })
