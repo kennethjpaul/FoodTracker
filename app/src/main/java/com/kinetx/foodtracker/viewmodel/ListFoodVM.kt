@@ -18,8 +18,8 @@ class ListFoodVM(application: Application): AndroidViewModel(application) {
 
 
     private val _foodList = MutableLiveData<List<FoodItemData>>()
-
-    var foodList : List<FoodItemData> = emptyList()
+    val foodList : LiveData<List<FoodItemData>>
+        get() = _foodList
 
     var foodDbQuery : LiveData<List<FoodDB>>
 
@@ -33,9 +33,14 @@ class ListFoodVM(application: Application): AndroidViewModel(application) {
 
     }
 
-    fun updateList() {
 
+    fun updateList(it: List<FoodDB>?) {
+
+        _foodList.value = it?.map {
+            FoodItemData(it.foodId,it.foodName,it.foodDesc)
+        }?.sortedBy { it.foodName }
     }
+
 
 
 }

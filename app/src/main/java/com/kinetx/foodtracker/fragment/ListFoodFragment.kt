@@ -52,12 +52,12 @@ class ListFoodFragment : Fragment(), FoodItemR.OnSelectFoodItem {
 
         viewModel.foodDbQuery.observe(viewLifecycleOwner)
         {
-            viewModel.foodList = it.map {
-                FoodItemData(it.foodId,it.foodName,it.foodDesc)
-            }
+            viewModel.updateList(it)
+        }
 
-            adapter.setData(viewModel.foodList)
-
+        viewModel.foodList.observe(viewLifecycleOwner)
+        {
+            adapter.setData(it)
         }
 
         return binding.root
@@ -65,7 +65,7 @@ class ListFoodFragment : Fragment(), FoodItemR.OnSelectFoodItem {
 
     override fun onSelectFoodItemClick(position: Int) {
 
-        val foodId = viewModel.foodList[position].foodId
+        val foodId = viewModel.foodList.value?.get(position)!!.foodId
         view?.findNavController()?.navigate(ListFoodFragmentDirections.actionListFoodFragmentToModifyFoodFragment(foodId))
 
     }
