@@ -3,7 +3,6 @@ package com.kinetx.foodtracker.viewmodel
 import android.app.Application
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
@@ -30,6 +29,7 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
 
     private val spinnerFoodTypeList = listOf("Breakfast","Lunch","Snacks","Dinner")
 
+    //TODO : Remove this mess private variable
     val foodTypeSpinnerSelectedM = MutableLiveData<Int>()
     val foodTypeSpinnerSelected : LiveData<Int>
         get() = foodTypeSpinnerSelectedM
@@ -55,6 +55,9 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
 
 
 
+    // Calendar-Date variables
+
+    private var myCalendar : Calendar = Calendar.getInstance()
 
     private val _selectedDay = MutableLiveData<String>()
     val selectedDay : LiveData<String>
@@ -68,31 +71,26 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     val selectedYear : LiveData<String>
         get() = _selectedYear
 
+
+
     private val _fragmentTitle = MutableLiveData<String>()
     val fragmentTitle : LiveData<String>
         get() = _fragmentTitle
+    
 
-    private var myCalendar : Calendar = Calendar.getInstance()
-
-
-    //
+    /// Food
 
     private val _foodLogDBQuery = MutableLiveData<FoodLogDB>()
     val foodLogDBQuery : LiveData<FoodLogDB>
         get() = _foodLogDBQuery
 
-    private var _foodLog = FoodLogDB()
-
-
-    /// Selected Food
-
-    private val _foodDbQuery = MutableLiveData<FoodDB>()
+    private var _foodDbQuery = MutableLiveData<FoodDB>()
     val foodDbQuery : LiveData<FoodDB>
         get() = _foodDbQuery
 
-    private val _foodDbQuery1 = MutableLiveData<FoodDB>()
-    val foodDbQuery1 : LiveData<FoodDB>
-        get() = _foodDbQuery1
+
+    private var _foodLog = FoodLogDB()
+
 
     private var _foodDb = FoodDB()
 
@@ -184,7 +182,9 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
                 _isEditVisible.value = View.VISIBLE
                 viewModelScope.launch(Dispatchers.IO)
                 {
-                    _foodLogDBQuery.postValue(repository.getFoodLogWithId(args.foodLogId))
+                    val tmp = repository.getFoodLogWithId(args.foodLogId)
+                    _foodLogDBQuery.postValue(tmp)
+                    _foodDbQuery.postValue(repository.getFoodWithId(tmp.foodId))
                 }
             }
         }
@@ -250,14 +250,12 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     fun updateSelectedFood(foodId: Long, foodName: String, foodDesc: String) {
         viewModelScope.launch(Dispatchers.IO)
         {
-            Log.i("III","updateSelectedFood with food id ${foodId}")
-            _foodDbQuery1.postValue(repository.getFoodWithId1(foodId))
+            _foodDbQuery.postValue(repository.getFoodWithId(foodId))
         }
     }
 
     fun updateInterface() {
         if (_foodDb.foodId!=-1L) {
-            Log.i("III", "Update interface was called")
             val c = _foodDb.foodCarbs
             val p = _foodDb.foodProtein
             val f = _foodDb.foodFat
@@ -302,9 +300,23 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
     }
 
 
+    fun updateFoodDB(it: FoodDB) {
+        _foodDb = it
+        _foodLog.foodId = it.foodId
+        _selectedFoodId.value = it.foodId
+        _selectedFoodName.value = it.foodName
+        _selectedFoodDesc.value = it.foodDesc
+        updateInterface()
+    }
+
+    fun updateFoodLogDB(it: FoodLogDB) {
+        _foodLog = it
+        foodQuantity.value = HelperFunctions.convertToString(it.foodQuantity)
+    }
+
     @OptIn(DelicateCoroutinesApi::class)
     fun createFoodLog(selectedFoodType: Int): Boolean {
-        
+
         val foodType = when(selectedFoodType)
         {
             0 -> FoodType.BREAKFAST
@@ -369,27 +381,6 @@ class ModifyFoodLogVM(application: Application, args: ModifyFoodLogFragmentArgs)
         }
 
         return true
-    }
-
-    fun updateFoodDB(it: FoodDB) {
-        Log.i("III","updateFoodDB was called food id ${it.foodId}")
-        _foodDb = it
-        _foodLog.foodId = it.foodId
-        _selectedFoodId.value = it.foodId
-        _selectedFoodName.value = it.foodName
-        _selectedFoodDesc.value = it.foodDesc
-        updateInterface()
-    }
-
-    fun updateFoodLogDB(it: FoodLogDB) {
-        testBool= false
-        _foodLog = it
-        foodQuantity.value = HelperFunctions.convertToString(it.foodQuantity)
-        viewModelScope.launch(Dispatchers.IO)
-        {
-            Log.i("III","updateFoodLogDB with food id ${it.foodId}")
-            _foodDbQuery.postValue(repository.getFoodWithId(it.foodId))
-        }
     }
 
     @OptIn(DelicateCoroutinesApi::class)

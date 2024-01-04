@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.kinetx.foodtracker.R
 import com.kinetx.foodtracker.databinding.FragmentModifyFoodLogBinding
-import com.kinetx.foodtracker.helpers.HelperFunctions
 import com.kinetx.foodtracker.viewmodel.ModifyFoodLogVM
 import com.kinetx.foodtracker.viewmodelfactory.ModifyFoodLogVMF
 
@@ -114,24 +113,10 @@ class ModifyFoodLogFragment : Fragment() {
         }
 
 
+
         viewModel.foodDbQuery.observe(viewLifecycleOwner)
         {
-            if(it!=null)
-            {
-                Log.i("III","${it.foodId},${it.foodName},${it.foodDesc}")
-                viewModel.updateFoodDB(it)
-
-            }
-        }
-
-        viewModel.foodDbQuery1.observe(viewLifecycleOwner)
-        {
-            if(it!=null)
-            {
-                Log.i("III","New ${it.foodId},${it.foodName},${it.foodDesc}")
-                viewModel.updateFoodDB(it)
-
-            }
+            viewModel.updateFoodDB(it)
         }
 
         viewModel.foodQuantity.observe(viewLifecycleOwner)
@@ -142,10 +127,7 @@ class ModifyFoodLogFragment : Fragment() {
 
         viewModel.foodLogDBQuery.observe(viewLifecycleOwner)
         {
-            Log.i("III","foodLogDBQuery Fragment")
-            if (viewModel.testBool) {
-                viewModel.updateFoodLogDB(it)
-            }
+            viewModel.updateFoodLogDB(it)
         }
 
 
