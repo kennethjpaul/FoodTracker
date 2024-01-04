@@ -78,4 +78,5 @@
     <string name="weight_gain">Weight gain \n0.5Kg/week</string>
     <string name="extreme_weight_gain">Extreme weight gain \n1Kg/week</string>
     <string name="meal_plans">Meal plans</string>
+    <string name="salt">Salt</string>
 </resources>

@@ -75,8 +75,8 @@
                             style="@style/material_card_edit_content"
                             android:hint="@string/food_description"
                             android:textAlignment="textStart"
-                            android:inputType="textMultiLine"
-                            android:maxLines="5"
+                            android:inputType="text"
+                            android:maxLines="1"
                             android:text="@={modifyFoodVM.foodDesc}"
                             android:layout_width="match_parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -192,7 +192,7 @@
                             android:background="@color/red"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_calories" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat_un_sat" />
 
                         <TextView
                             style="@style/material_card_subtitle"
@@ -223,7 +223,7 @@
                             android:text="@={modifyFoodVM.foodFiber}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_carbs" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sugar" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -238,7 +238,7 @@
                             android:text="@={modifyFoodVM.foodSugar}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fiber" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_carbs" />
 
                         <View
                             android:id="@+id/modify_food_stats_sep_4"
@@ -246,7 +246,7 @@
                             android:background="@color/red"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sugar" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fiber" />
 
                         <TextView
                             style="@style/material_card_subtitle"
@@ -269,7 +269,7 @@
                             android:background="@color/red"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_protein" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_calories" />
 
                         <TextView
                             style="@style/material_card_subtitle"
@@ -323,7 +323,7 @@
                             android:background="@color/red"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat_un_sat" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_protein" />
 
                         <TextView
                             android:id="@+id/modify_food_stats_other"
@@ -349,7 +349,7 @@
 
                         <TextView
                             style="@style/material_card_content"
-                            android:text="@string/sodium"
+                            android:text="@string/salt"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/modify_food_stats_sodium"
                             app:layout_constraintBottom_toBottomOf="@+id/modify_food_stats_sodium"/>
