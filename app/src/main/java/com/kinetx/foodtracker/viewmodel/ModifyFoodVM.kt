@@ -62,7 +62,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
 
 
 
-
+    //TODO : get the values from a common dataset
     private val spinnerUnitList = listOf("g","ml","nos")
 
     private val _foodUnitSpinnerSelected = MutableLiveData<Int>()
@@ -76,9 +76,11 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
 
 
 
-    private val _foodDB = MutableLiveData<FoodDB>()
-    val foodDB : LiveData<FoodDB>
-        get() = _foodDB
+    private val _foodDBQuery = MutableLiveData<FoodDB>()
+    val foodDBQuery : LiveData<FoodDB>
+        get() = _foodDBQuery
+
+    var foodDB = FoodDB()
 
     private val repository : DatabaseRepository
 
@@ -90,8 +92,6 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
         val userDao = DatabaseMain.getInstance(application).databaseDao
         repository = DatabaseRepository(userDao)
 
-        _foodDB.value = FoodDB()
-        Log.i("III food id",args.foodId.toString())
         when(args.foodId)
         {
             -1L->
@@ -108,13 +108,16 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
                 Log.i("III food id 2",args.foodId.toString())
                 viewModelScope.launch(Dispatchers.IO)
                 {
-                    _foodDB.postValue(repository.getFoodWithId(args.foodId))
+                    _foodDBQuery.postValue(repository.getFoodWithId(args.foodId))
                 }
             }
         }
     }
 
     fun updateInterface(it:FoodDB) {
+
+
+        foodDB = it
 
         foodName.value = it.foodName
         foodDesc.value = it.foodDesc
@@ -144,8 +147,8 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
 
     fun createFood(selectedUnitPosition: Int) : Boolean {
 
-        _foodDB.value?.foodId = 0
-        _foodDB.value?.foodServingUnit = when(selectedUnitPosition)
+        foodDB.foodId = 0
+        foodDB.foodServingUnit = when(selectedUnitPosition)
         {
             0 -> ServingUnit.G
             1 -> ServingUnit.ML
@@ -153,11 +156,11 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
             else-> ServingUnit.G
         }
 
-        if (checkFoodData(_foodDB.value))
+        if (checkFoodData(foodDB))
         {
             GlobalScope.launch(Dispatchers.IO)
             {
-                repository.insertFood(foodDB.value!!)
+                repository.insertFood(foodDB)
             }
 
             return true
@@ -169,7 +172,7 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
 
     fun updateFood(selectedUnitPosition: Int): Boolean
     {
-        _foodDB.value?.foodServingUnit = when(selectedUnitPosition)
+        foodDB.foodServingUnit = when(selectedUnitPosition)
         {
             0 -> ServingUnit.G
             1 -> ServingUnit.ML
@@ -177,11 +180,11 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
             else-> ServingUnit.G
         }
 
-        if (checkFoodData(_foodDB.value))
+        if (checkFoodData(foodDB))
         {
             GlobalScope.launch(Dispatchers.IO)
             {
-                repository.updateFood(foodDB.value!!)
+                repository.updateFood(foodDB)
             }
 
             return true
@@ -193,33 +196,33 @@ class ModifyFoodVM(application: Application, args: ModifyFoodFragmentArgs): Andr
     fun deleteFood() {
         GlobalScope.launch(Dispatchers.IO)
         {
-            repository.deleteFood(foodDB.value!!)
-            repository.deleteFoodLogWithFood(foodDB.value!!.foodId)
+            repository.deleteFood(foodDB)
+            repository.deleteFoodLogWithFood(foodDB.foodId)
         }
     }
 
 
-    private fun checkFoodData(foodDB: FoodDB?) :Boolean
+    private fun checkFoodData(foodDB: FoodDB) :Boolean
     {
 
         val context = getApplication<Application>().applicationContext
 
-        if (foodDB?.foodName=="")
+        if (foodDB.foodName=="")
         {
             Toast.makeText(context,"Food name cannot be empty",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (foodDB?.foodDesc=="")
+        if (foodDB.foodDesc=="")
         {
             Toast.makeText(context,"Food description cannot be empty",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (foodDB?.foodServingSize==0.0f)
+        if (foodDB.foodServingSize==0.0f)
         {
             Toast.makeText(context,"Serving size value cannot be empty",Toast.LENGTH_SHORT).show()
             return false
         }
-        if (foodDB?.foodCalories==0.0f)
+        if (foodDB.foodCalories==0.0f)
         {
             Toast.makeText(context,"Calories value cannot be empty",Toast.LENGTH_SHORT).show()
             return false
