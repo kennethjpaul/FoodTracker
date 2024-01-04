@@ -11,7 +11,9 @@ import com.kinetx.foodtracker.dataclass.FoodItemData
 
 class SelectFoodVM(application: Application): AndroidViewModel(application) {
 
-    var foodList : List<FoodItemData> = emptyList()
+    private val _foodList = MutableLiveData<List<FoodItemData>>()
+    val foodList : LiveData<List<FoodItemData>>
+        get() = _foodList
 
     var foodDbQuery : LiveData<List<FoodDB>>
 
@@ -25,5 +27,12 @@ class SelectFoodVM(application: Application): AndroidViewModel(application) {
         foodDbQuery = repository.getAllFood
 
 
+    }
+
+    fun updateList(it: List<FoodDB>?) {
+
+        _foodList.value = it?.map {
+            FoodItemData(it.foodId,it.foodName,it.foodDesc)
+        }?.sortedBy { it.foodName }
     }
 }
