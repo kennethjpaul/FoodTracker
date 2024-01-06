@@ -78,12 +78,14 @@
                     android:layout_marginTop="8dp"
                     android:autofillHints="age"
                     android:ems="2"
+                    android:hint="@string/_0"
                     android:inputType="number"
                     android:maxLength="2"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/goals_age_text"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
 
                 <TextView
                     android:id="@+id/goals_gender_text"
@@ -107,14 +109,16 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/azure"
                         android:text="@string/male"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        tools:ignore="TextContrastCheck" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/azure"
                         android:text="@string/female"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        tools:ignore="TextContrastCheck" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:layout_width="wrap_content"
@@ -140,6 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:hint="@string/_0"
                     android:ems="3"
                     android:inputType="number"
                     android:maxLength="3"
@@ -178,6 +183,7 @@
                     android:ems="3"
                     android:inputType="number"
                     android:maxLength="3"
+                    android:hint="@string/_0"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/goals_weight_text"
@@ -219,6 +225,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:minHeight="48dp"
+                    android:contentDescription="@string/various_activity_levels_can_be_chosen_from_this"
                     android:theme="@style/ThemeOverlay.Material3.Light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +249,8 @@
                     android:textColor="@color/black_500"
                     app:layout_constraintBottom_toBottomOf="@+id/goals_age"
                     app:layout_constraintStart_toStartOf="@+id/goals_age"
-                    app:layout_constraintTop_toTopOf="@+id/goals_age" />
+                    app:layout_constraintTop_toTopOf="@+id/goals_age"
+                    tools:ignore="TextContrastCheck" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

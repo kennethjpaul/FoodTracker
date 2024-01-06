@@ -83,4 +83,14 @@
     <string name="kg">kg</string>
     <string name="years">yrs</string>
     <string name="header_image_for_the_page">header image for the page</string>
+    <string name="button_to_decrease_date_by_one">It is used to decrease date by one</string>
+    <string name="button_to_increase_date_by_one">It is used to increase date by one</string>
+    <string name="this_is_used_to_display_the_current_selected_date_clicking_on_it_will_open_a_day_picker_dialog">This is used to display the current chosen date. Clicking on it will open a day picker dialog</string>
+    <string name="_0">0</string>
+    <string name="various_activity_levels_can_be_chosen_from_this">Various activity levels can be chosen from this</string>
+    <string name="lists_various_units_used_to_define_a_serving">Lists various units used to define a serving</string>
+    <string name="use_it_to_choose_the_food_to_be_entered_into_the_log">Use it to choose the food to be entered into the log</string>
+    <string name="choose_the_type_of_food_log">Choose the type of food log</string>
+    <string name="used_to_add_a_food_log">Used to add a food log</string>
+    <string name="icon_for_a_food_log">Icon for a food log</string>
 </resources>

@@ -30,6 +30,7 @@
                     android:layout_height="200dp"
                     android:background="@color/azure"
                     android:src="@drawable/food"
+                    android:contentDescription="@string/header_image_for_the_page"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -62,23 +63,27 @@
                         <EditText
                             android:id="@+id/modify_food_name"
                             style="@style/material_card_edit_subtitle"
-                            android:hint="@string/food_name"
-                            android:textAlignment="textStart"
-                            android:inputType="text"
-                            android:text="@={modifyFoodVM.foodName}"
                             android:layout_width="match_parent"
+                            android:autofillHints="Food name"
+                            android:hint="@string/food_name"
+                            android:inputType="text"
+                            android:minHeight="48dp"
+                            android:text="@={modifyFoodVM.foodName}"
+                            android:textAlignment="textStart"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/modify_food_details_title" />
 
                         <EditText
                             android:id="@+id/modify_food_desc"
                             style="@style/material_card_edit_content"
+                            android:layout_width="match_parent"
+                            android:autofillHints="Food description"
                             android:hint="@string/food_description"
-                            android:textAlignment="textStart"
                             android:inputType="text"
                             android:maxLines="1"
+                            android:minHeight="48dp"
                             android:text="@={modifyFoodVM.foodDesc}"
-                            android:layout_width="match_parent"
+                            android:textAlignment="textStart"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/modify_food_name" />
 
@@ -114,12 +119,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:autofillHints="Food quantity"
                             android:backgroundTint="@color/ao"
-                            android:textAlignment="textEnd"
-                            android:text="@={modifyFoodVM.foodServing}"
-                            android:inputType="numberDecimal"
-                            android:textColor="@color/black"
                             android:ems="5"
+                            android:hint="@string/_0"
+                            android:inputType="numberDecimal"
+                            android:minHeight="48dp"
+                            android:text="@={modifyFoodVM.foodServing}"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/modify_food_serving_title" />
 
@@ -128,9 +136,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:theme="@style/ThemeOverlay.Material3.Light"
                             android:entries="@{modifyFoodVM.foodUnitSpinner}"
+                            android:minHeight="48dp"
+                            android:contentDescription="@string/lists_various_units_used_to_define_a_serving"
                             android:selectedItemPosition="@{modifyFoodVM.foodUnitSpinnerSelected}"
+                            android:theme="@style/ThemeOverlay.Material3.Light"
                             app:layout_constraintBottom_toBottomOf="@+id/modify_food_details_value"
                             app:layout_constraintStart_toEndOf="@+id/modify_food_details_value"
                             app:layout_constraintTop_toTopOf="@+id/modify_food_details_value" />
@@ -184,7 +194,8 @@
                             android:text="@={modifyFoodVM.foodCalories}"
                             android:hint="@string/kcal"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_1" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_1"
+                            android:autofillHints="Calories in food" />
 
                         <View
                             android:id="@+id/modify_food_stats_sep_3"
@@ -207,7 +218,8 @@
                             android:text="@={modifyFoodVM.foodCarbs}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_3" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_3"
+                            android:autofillHints="Carbs in food" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -223,7 +235,8 @@
                             android:text="@={modifyFoodVM.foodFiber}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sugar" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sugar"
+                            android:autofillHints="Fiber in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -238,7 +251,8 @@
                             android:text="@={modifyFoodVM.foodSugar}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_carbs" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_carbs"
+                            android:autofillHints="Sugar in food" />
 
                         <View
                             android:id="@+id/modify_food_stats_sep_4"
@@ -261,7 +275,8 @@
                             android:text="@={modifyFoodVM.foodProtein}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_4" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_4"
+                            android:autofillHints="Protein in food" />
 
                         <View
                             android:id="@+id/modify_food_stats_sep_5"
@@ -284,7 +299,8 @@
                             android:text="@={modifyFoodVM.foodFat}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_5" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sep_5"
+                            android:autofillHints="Fat in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -300,7 +316,8 @@
                             android:text="@={modifyFoodVM.foodFatSat}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat"
+                            android:autofillHints="Saturated fat in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -315,7 +332,8 @@
                             android:text="@={modifyFoodVM.foodFatUnSat}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat_sat" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_fat_sat"
+                            android:autofillHints="Unsaturated fat in food" />
 
                         <View
                             android:id="@+id/modify_food_stats_sep_6"
@@ -345,7 +363,8 @@
                             android:text="@={modifyFoodVM.foodCholesterol}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_other" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_other"
+                            android:autofillHints="Cholesterol in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -360,7 +379,8 @@
                             android:text="@={modifyFoodVM.foodSodium}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_cholesterol" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_cholesterol"
+                            android:autofillHints="Salt in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -375,7 +395,8 @@
                             android:text="@={modifyFoodVM.foodPotassium}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sodium" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_sodium"
+                            android:autofillHints="Potassium in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -390,7 +411,8 @@
                             android:text="@={modifyFoodVM.foodIron}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_potassium" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_potassium"
+                            android:autofillHints="Iron in food" />
 
                         <TextView
                             style="@style/material_card_content"
@@ -405,7 +427,8 @@
                             android:text="@={modifyFoodVM.foodVitaminD}"
                             android:hint="@string/g"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_iron" />
+                            app:layout_constraintTop_toBottomOf="@+id/modify_food_stats_iron"
+                            android:autofillHints="Vitamin D in food" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>

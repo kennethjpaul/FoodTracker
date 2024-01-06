@@ -4,19 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2905" />
+        <entry key="app/src/main/res/drawable/c_height_icon.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2905" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
         <entry key="app/src/main/res/layout/c_food_card.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/fragment_daily_exercise.xml" value="0.5119791666666667" />
         <entry key="app/src/main/res/layout/fragment_daily_food.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/fragment_goals.xml" value="0.2864583333333333" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_goals.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_list_exercise.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_list_food.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_log_exercise.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_log_food.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_modify_food.xml" value="0.24864130434782608" />
-        <entry key="app/src/main/res/layout/fragment_modify_food_log.xml" value="0.29039070749736007" />
+        <entry key="app/src/main/res/layout/fragment_modify_food_log.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_select_food.xml" value="0.2489868287740628" />
         <entry key="app/src/main/res/layout/fragment_stats_daily.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_stats_monthly.xml" value="0.2864583333333333" />

@@ -48,7 +48,8 @@
                 android:src="@drawable/ic_baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="@+id/food_card_rectangle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/food_card_rectangle" />
+                app:layout_constraintTop_toTopOf="@+id/food_card_rectangle"
+                android:contentDescription="@string/used_to_add_a_food_log" />
 
             <TextView
                 android:id="@+id/food_card_total_value"
