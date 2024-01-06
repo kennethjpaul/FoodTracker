@@ -24,15 +24,16 @@
 
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/goals_header"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@color/azure"
+            android:contentDescription="@string/header_image_for_the_page"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/goals_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -60,43 +61,46 @@
             <androidx.constraintlayout.widget.ConstraintLayout style="@style/material_card_constraint">
 
                 <TextView
-                    android:id="@+id/textView6"
-                    style="@style/material_card_subtitle"
+                    android:id="@+id/goals_age_text"
+                    style="@style/material_card_title"
+                    android:layout_marginStart="16dp"
                     android:text="@string/age"
-                    app:layout_constraintBottom_toTopOf="@+id/goals_age"
-                    app:layout_constraintStart_toStartOf="@+id/goals_age" />
+                    app:layout_constraintBottom_toBottomOf="@+id/goals_age"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/goals_age" />
 
                 <EditText
                     android:id="@+id/goals_age"
                     style="@style/material_card_edit_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:autofillHints="age"
+                    android:ems="2"
                     android:inputType="number"
-                    android:maxLength="3"
+                    android:maxLength="2"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/goals_age_text"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView7"
-                    style="@style/material_card_subtitle"
-                    android:layout_marginBottom="8dp"
+                    android:id="@+id/goals_gender_text"
+                    style="@style/material_card_title"
+                    android:layout_marginTop="8dp"
                     android:text="@string/gender"
-                    app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-                    app:layout_constraintStart_toStartOf="@+id/radioGroup" />
+                    app:layout_constraintStart_toStartOf="@+id/goals_radio_group"
+                    app:layout_constraintTop_toBottomOf="@+id/goals_age_text" />
 
                 <RadioGroup
-                    android:id="@+id/radioGroup"
+                    android:id="@+id/goals_radio_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="128dp"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/goals_gender_text">
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:layout_width="wrap_content"
@@ -122,44 +126,73 @@
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/textView8"
-                    style="@style/material_card_subtitle"
+                    android:id="@+id/goals_height_text"
+                    style="@style/material_card_title"
                     android:text="@string/height"
-                    app:layout_constraintBottom_toTopOf="@+id/goals_height"
-                    app:layout_constraintStart_toStartOf="@+id/goals_height" />
+                    app:layout_constraintBottom_toBottomOf="@+id/goals_height"
+                    app:layout_constraintStart_toStartOf="@+id/goals_radio_group"
+                    app:layout_constraintTop_toTopOf="@+id/goals_height" />
 
                 <EditText
                     android:id="@+id/goals_height"
                     style="@style/material_card_edit_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:maxLength="3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="3"
                     android:inputType="number"
+                    android:maxLength="3"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/radioGroup"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintStart_toEndOf="@+id/goals_height_text"
+                    app:layout_constraintTop_toBottomOf="@+id/goals_radio_group"
+                    android:autofillHints="height" />
 
                 <TextView
-                    android:id="@+id/textView9"
-                    style="@style/material_card_subtitle"
+                    android:id="@+id/goals_height_text_cm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="@string/cm"
+                    android:textColor="#757575"
+                    app:layout_constraintBottom_toBottomOf="@+id/goals_height"
+                    app:layout_constraintStart_toStartOf="@+id/goals_height"
+                    app:layout_constraintTop_toTopOf="@+id/goals_height" />
+
+                <TextView
+                    android:id="@+id/goals_weight_text"
+                    style="@style/material_card_title"
                     android:text="@string/weight"
-                    app:layout_constraintBottom_toTopOf="@+id/goals_height"
-                    app:layout_constraintStart_toStartOf="@+id/goals_weight" />
+                    app:layout_constraintBottom_toBottomOf="@+id/goals_weight"
+                    app:layout_constraintStart_toStartOf="@+id/goals_vertical_guide"
+                    app:layout_constraintTop_toTopOf="@+id/goals_weight" />
 
                 <EditText
                     android:id="@+id/goals_weight"
                     style="@style/material_card_edit_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:maxLength="3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="3"
                     android:inputType="number"
+                    android:maxLength="3"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/goals_vertical_guide"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintStart_toEndOf="@+id/goals_weight_text"
+                    app:layout_constraintTop_toBottomOf="@+id/goals_radio_group"
+                    android:autofillHints="weight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="@string/kg"
+                    android:textColor="#757575"
+                    app:layout_constraintBottom_toBottomOf="@+id/goals_weight"
+                    app:layout_constraintStart_toStartOf="@+id/goals_weight"
+                    app:layout_constraintTop_toTopOf="@+id/goals_weight" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/goals_vertical_guide"
@@ -172,23 +205,24 @@
 
 
                 <TextView
-                    style="@style/material_card_subtitle"
-                    android:layout_marginBottom="8dp"
+                    android:id="@+id/goals_activity_text"
+                    style="@style/material_card_title"
+                    android:layout_marginTop="8dp"
                     android:text="@string/activity"
-                    app:layout_constraintBottom_toTopOf="@+id/goals_activity"
-                    app:layout_constraintStart_toStartOf="@+id/goals_activity" />
+                    app:layout_constraintStart_toStartOf="@+id/goals_activity"
+                    app:layout_constraintTop_toBottomOf="@+id/goals_height_text" />
 
                 <Spinner
                     android:id="@+id/goals_activity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="48dp"
                     android:layout_marginEnd="16dp"
+                    android:minHeight="48dp"
                     android:theme="@style/ThemeOverlay.Material3.Light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/goals_height" />
+                    app:layout_constraintTop_toBottomOf="@+id/goals_activity_text" />
 
                 <Button
                     android:id="@+id/goals_update_details"
@@ -199,6 +233,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/goals_activity" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="@string/years"
+                    android:textColor="@color/black_500"
+                    app:layout_constraintBottom_toBottomOf="@+id/goals_age"
+                    app:layout_constraintStart_toStartOf="@+id/goals_age"
+                    app:layout_constraintTop_toTopOf="@+id/goals_age" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,12 +263,12 @@
                     <TextView
                         style="@style/material_card_title"
                         android:text="@string/meal_plans"
-                        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
-                        app:layout_constraintStart_toStartOf="@+id/radioGroup2" />
+                        app:layout_constraintBottom_toTopOf="@+id/goals_radio_group2"
+                        app:layout_constraintStart_toStartOf="@+id/goals_radio_group2" />
 
 
                     <RadioGroup
-                        android:id="@+id/radioGroup2"
+                        android:id="@+id/goals_radio_group2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
@@ -289,7 +333,7 @@
                         android:text="@string/update"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+                        app:layout_constraintTop_toBottomOf="@+id/goals_radio_group2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

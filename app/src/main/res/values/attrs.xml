@@ -25,4 +25,7 @@
         <attr name="weekEndMonth_c" format="string"/>
         <attr name="type_c" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="PieChart">
+        <attr name="pieData" format="string"/>
+    </declare-styleable>
 </resources>

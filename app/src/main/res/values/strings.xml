@@ -79,4 +79,8 @@
     <string name="extreme_weight_gain">Extreme weight gain \n1Kg/week</string>
     <string name="meal_plans">Meal plans</string>
     <string name="salt">Salt</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+    <string name="years">yrs</string>
+    <string name="header_image_for_the_page">header image for the page</string>
 </resources>

@@ -21,6 +21,13 @@
             android:layout_height="match_parent"
             android:text="Test" />
 
+        <com.kinetx.foodtracker.customview.PieChart
+            android:layout_width="200dp"
+            android:layout_height="400dp"
+            app:pieData="@{homeVM.pieData}"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
